@@ -8,7 +8,6 @@ use App\Http\Controllers\ConstructionSiteController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportLineController;
 
-
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');

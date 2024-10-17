@@ -33,7 +33,7 @@ class UserController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'role' => 'required|exists:roles,id',
-            'reports' => 'required|array',
+            'reports' => 'array',
             'reports.*' => 'exists:reports,id'
         ]);
 

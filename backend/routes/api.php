@@ -13,6 +13,21 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// Login Route
+Route::post('/login', function (Request $request) {
+    if (! Auth::attempt($request->only('email', 'password'))) {
+        return response(['message' => __('auth.failed')], 422);
+    }
+    
+    $token = auth()->user()->createToken('client-app');
+    return ['token' => $token->plainTextToken];
+});
+// Logout Route
+Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {
+    $request->user()->currentAccessToken()->delete();
+    return response()->noContent();
+});
+
 //Role
 Route::get('/roles', [RoleController::Class, 'index']);
 Route::get('/roles/{id}', [RoleController::Class, 'show']);

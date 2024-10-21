@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConstructionSiteController;
@@ -13,15 +14,10 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 //Role
-//Index: Get all records
 Route::get('/roles', [RoleController::Class, 'index']);
-//Show: Get a single record (if it exists)
 Route::get('/roles/{id}', [RoleController::Class, 'show']);
-//Store: Save a new record
 Route::post('/roles', [RoleController::Class, 'store']);
-//Update: Update an existing record (if it exists)
 Route::put('/roles/{id}', [RoleController::Class, 'update']);
-//Destroy: Delete an existing record (if it exists)
 Route::delete('/roles/{id}', [RoleController::Class, 'destroy']);
 
 //User

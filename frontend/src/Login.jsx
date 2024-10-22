@@ -29,11 +29,11 @@ export default function Login() {
            <form onSubmit={handleSubmit}>
               <div>
                  <label>Email:</label>
-                 <input type="text" onChange={e => setEmail(e.target.value)} autoComplete="email" />
+                 <input type="email" value={email} onChange={e => setEmail(e.target.value)} autoComplete="email" />
               </div>
               <div>
                  <label>Password:</label>
-                 <input type="password" onChange={e => setPassword(e.target.value)} />
+                 <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
               </div>
               <button type="submit">Login</button>
            </form>

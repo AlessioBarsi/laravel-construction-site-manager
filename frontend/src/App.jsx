@@ -1,16 +1,11 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 import './App.css';
-import MainContent from './MainContent';
-
-export const UserContext = createContext(null);
-
 function App() {
-
-  return (
-    <div>
-      Homepage
-    </div>
-  );
+   return (
+      <div className="App">
+         <Outlet />
+      </div>
+   );
 }
-
 export default App;

@@ -1,12 +1,14 @@
 import axios from 'axios';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter , Routes, Route } from 'react-router-dom';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
+import Login from './Login.jsx';
+import User from './User.jsx';
 
 // Set axios to a window property for easy access
 window.axios = axios;
@@ -37,6 +39,13 @@ axios.interceptors.response.use(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <BrowserRouter>
+         <Routes>
+            <Route path="/" element={<App />}>
+               <Route path="/login" element={<Login />} />
+               <Route path="/user" element={<User />} />
+            </Route>
+         </Routes>
+    </BrowserRouter>
   </StrictMode>,
 )

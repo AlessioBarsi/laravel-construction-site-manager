@@ -39,13 +39,13 @@ axios.interceptors.response.use(
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+   <BrowserRouter>
          <Routes>
             <Route path="/" element={<App />}>
                <Route path="/login" element={<Login />} />
                <Route path="/user" element={<User />} />
             </Route>
          </Routes>
-    </BrowserRouter>
+   </BrowserRouter>
   </StrictMode>,
 )

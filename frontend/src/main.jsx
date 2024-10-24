@@ -6,7 +6,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import About from "./About.jsx";
 import App from './App.jsx';
-import Dashboard from './Dashboard.jsx';
+import Header from './Header.jsx';
 import Login from './Login.jsx';
 import User from './User.jsx';
 import './index.css';
@@ -42,11 +42,11 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
    <BrowserRouter>
       <Routes>
-         <Route path="/" element={<App />}>
+         <Route path="/" element={<Header />}>
+            <Route index element={<App />}/>
             <Route path="/login" element={<Login />} />
             <Route path="/about" element={<About />} />
             <Route path="/user" element={<User />} />
-            <Route path="/dashboard" element={<Dashboard />} />
          </Route>
       </Routes>
    </BrowserRouter>

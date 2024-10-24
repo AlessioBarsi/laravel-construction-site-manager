@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
 import { AuthProvider, useAuth } from './AuthContext';
-import './App.css';
 import Login from './Login';
 
 

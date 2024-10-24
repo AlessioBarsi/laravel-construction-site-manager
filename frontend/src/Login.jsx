@@ -14,7 +14,7 @@ export default function Login() {
         axios.post('/login', { email, password })
         .then(response => {
             login(response.data.token);
-            navigate('/user');
+            navigate('/dashboard');
         })
         .catch(error => {
             if (error.response && error.response.status === 422) {

@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './AuthContext';
 import './App.css';
 import Login from './Login';
 
 
 function App() {
-   const [isLoggedIn, setIsLoggedIn] = useState(false);
-   const navigate = useNavigate();
-
-   useEffect(()=> {
-      const token = localStorage.getItem('token');
-      if (token) {
-         setIsLoggedIn(true);
-      } else {
-         setIsLoggedIn(false);
-      }
-   }, []);
+   const { isLoggedIn } = useAuth();
 
    return (
       <div className="App">
@@ -23,4 +14,11 @@ function App() {
       </div>
    );
 }
-export default App;
+
+export default function AppWrapper() {
+   return (
+       <AuthProvider>
+           <App />
+       </AuthProvider>
+   );
+}

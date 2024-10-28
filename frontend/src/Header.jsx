@@ -1,13 +1,13 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Link, Outlet } from 'react-router-dom'
 import { useAuth } from './AuthContext'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
-  { name: 'Team', href: '#', current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
+  { name: 'Construction Sites', href: '/sites', current: true },
+  { name: 'Reports', href: '/reports', current: true },
+  { name: 'Users', href: '/users', current: true },
 ]
 
 function classNames(...classes) {
@@ -17,7 +17,7 @@ function classNames(...classes) {
 export default function Header() {
   return (
     <main>
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-orange-500">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -62,7 +62,7 @@ export default function Header() {
             >
               <span className="absolute -inset-1.5" />
               <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="h-6 w-6" />
+              <BellIcon aria-hidden="true" className="h-8 w-8" />
             </button>
 
             {/* Profile dropdown */}
@@ -71,11 +71,8 @@ export default function Header() {
                 <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <img
-                    alt=""
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    className="h-8 w-8 rounded-full"
-                  />
+                  <UserCircleIcon aria-hidden="true" className="h-8 w-8 text-gray-400 hover:text-white"/>
+
                 </MenuButton>
               </div>
               <MenuItems

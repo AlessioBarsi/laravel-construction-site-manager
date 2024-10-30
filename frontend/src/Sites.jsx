@@ -1,31 +1,21 @@
+import React from 'react';
+import { DataGrid } from '@mui/x-data-grid';
 
-export default function Sites(){
-    return (
-    <table class="table-auto">
-    <thead>
-        <tr>
-        <th>Song</th>
-        <th>Artist</th>
-        <th>Year</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-        <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-        <td>Malcolm Lockyer</td>
-        <td>1961</td>
-        </tr>
-        <tr>
-        <td>Witchy Woman</td>
-        <td>The Eagles</td>
-        <td>1972</td>
-        </tr>
-        <tr>
-        <td>Shining Star</td>
-        <td>Earth, Wind, and Fire</td>
-        <td>1975</td>
-        </tr>
-    </tbody>
-    </table>
-    );
+const rows = [
+  { id: 1, col1: 'Hello', col2: 'World' },
+  { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
+  { id: 3, col1: 'MUI', col2: 'is Amazing' },
+];
+
+const columns = [
+  { field: 'col1', headerName: 'Column 1', width: 150 },
+  { field: 'col2', headerName: 'Column 2', width: 150 },
+];
+
+export default function Sites() {
+  return (
+    <div style={{ height: 300, width: '100%' }}>
+      <DataGrid rows={rows} columns={columns} />
+    </div>
+  );
 }

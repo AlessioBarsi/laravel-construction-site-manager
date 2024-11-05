@@ -7,8 +7,8 @@ import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import { DataGrid } from '@mui/x-data-grid';
 import { userService } from './api/users';
-import { parseISO, format } from 'date-fns';
-
+import { format } from 'date-fns';
+import CellButtons from './CellButtons';
 
 const columns = [
   { field: 'id', headerName: 'ID', headerClassName: 'table-header', flex : 1, maxWidth: 100 },
@@ -23,6 +23,9 @@ const columns = [
       return format(params, 'yyyy-MM-dd HH:mm');
     }, flex : 1
   },
+  { field: 'buttons', headerName: '', headerClassName: 'table-header', flex: 1,
+   renderCell: (params) => ( <CellButtons id={params.id}/> ) 
+  }
 ];
 
 export default function Users() {

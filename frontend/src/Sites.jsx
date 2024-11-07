@@ -1,21 +1,96 @@
-import React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useState, useEffect } from 'react';
+import { format } from 'date-fns';
+import CellButtons from './CellButtons';
+import { siteService } from './api/sites';
 
-const rows = [
-  { id: 1, col1: 'Hello', col2: 'World' },
-  { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-  { id: 3, col1: 'MUI', col2: 'is Amazing' },
-];
+import { DataGrid } from '@mui/x-data-grid';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardHeader from '@mui/material/CardHeader';
+import Button from '@mui/material/Button';
+import Grid from '@mui/material/Grid2';
 
 const columns = [
-  { field: 'col1', headerName: 'Column 1', width: 150 },
-  { field: 'col2', headerName: 'Column 2', width: 150 },
+  { field: 'id', headerName: 'ID', headerClassName: 'table-header', flex: 1, maxWidth: 100 },
+  { field: 'title', headerName: 'First name', headerClassName: 'table-header', flex: 1, },
+  { field: 'client', headerName: 'Last name', headerClassName: 'table-header', flex: 1, },
+  { field: 'location', headerName: 'Email', headerClassName: 'table-header', flex: 1, },
+  { field: 'start_date', headerName: 'Site', headerClassName: 'table-header', flex: 1, },
+  { field: 'end_date', headerName: 'Age', headerClassName: 'table-header', flex: 1, },
+  { field: 'status', headerName: 'Age', headerClassName: 'table-header', flex: 1, },
+  { field: 'director', headerName: 'Age', headerClassName: 'table-header', flex: 1, },
+  {
+    field: 'buttons', headerName: '', headerClassName: 'table-header', flex: 1,
+    renderCell: (params) => (<CellButtons id={params.id} />)
+  }
 ];
 
-export default function Sites() {
+export default function Users() {
+  const [rows, setRows] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSites = async () => {
+      try {
+        setLoading(true);
+        const sites = await siteService.getSites();
+        const formattedRows = sites.map(site => ({
+          id: site.id,
+          title: site.title,
+          client: site.client,
+          location: site.location,
+          start_date: site.start_date,
+          end_date: site.end_date,
+          status: site.status,
+          director: site.director,
+        }));
+        setRows(formattedRows);
+
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchSites();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
-    <div style={{ height: 300, width: '100%' }}>
-      <DataGrid rows={rows} columns={columns} />
+    <div className='ml-2 mr-2'>
+      <Grid container spacing={2}>
+        <Grid size={12}>
+          <Card variant='outlined'>
+            <CardHeader title="Construction Site"
+              subheader="Filter options are available for each column"
+              titleTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
+              subheaderTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold' }}
+            />
+            <CardContent>
+              <div>
+                <DataGrid
+                  sx={{
+                    '& .MuiDataGrid-columnHeaderTitle': {
+                      fontWeight: 'bold',
+                    },
+                  }}
+                  rows={rows}
+                  columns={columns}
+                  disableRowSelectionOnClick
+                />
+              </div>
+            </CardContent>
+            <CardActions>
+              <Button size="small">Card Action Button</Button>
+            </CardActions>
+          </Card>
+        </Grid>
+
+      </Grid>
     </div>
   );
 }

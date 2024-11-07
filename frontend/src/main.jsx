@@ -1,14 +1,15 @@
 import axios from 'axios';
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import About from "./About.jsx";
+import AppWrapper from './App.jsx';
 import App from './App.jsx';
 import Header from './Header.jsx';
 import Login from './Login.jsx';
 import User from './User.jsx';
+import Site from './Site.jsx';
 import Sites from './Sites.jsx';
 import Users from './Users.jsx';
 import './index.css';
@@ -28,31 +29,34 @@ if (token) {
 
 // Intercept responses. If 401 error, clear token and redirect to login
 axios.interceptors.response.use(
-  response => response,
-  error => {
-     if (error.response?.status === 401) {
-        localStorage.removeItem('token');
-        axios.defaults.headers.common['Authorization'] = 'Bearer';
-        // Redirect to login route
-        return <Redirect to="/login" />;
-     }
-     return Promise.reject(error);
-  }
+   response => response,
+   error => {
+      if (error.response?.status === 401) {
+         localStorage.removeItem('token');
+         axios.defaults.headers.common['Authorization'] = 'Bearer';
+         // Redirect to login route
+         return <Redirect to="/login" />;
+      }
+      return Promise.reject(error);
+   }
 );
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
-   <BrowserRouter>
-      <Routes>
-         <Route path="/" element={<Header />}>
-            <Route index element={<App />}/>
-            <Route path="/login" element={<Login />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/user" element={<User />} />
-            <Route path="/users" element={<Users />}/>
-            <Route path="/sites" element={<Sites />}/>
-         </Route>
-      </Routes>
-   </BrowserRouter>
-  </StrictMode>,
+   <StrictMode>
+      <BrowserRouter>
+         <AppWrapper>
+            <Routes>
+               <Route path="/" element={<Header />}>
+                  <Route index element={<App />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/user" element={<User />} />
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/sites" element={<Sites />} />
+                  <Route path="/site/:id" element={<Site />} />
+               </Route>
+            </Routes>
+         </AppWrapper>
+      </BrowserRouter>
+   </StrictMode>,
 )

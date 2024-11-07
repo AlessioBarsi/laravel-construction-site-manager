@@ -13,10 +13,10 @@ function App() {
    );
 }
 
-export default function AppWrapper() {
+export default function AppWrapper({children}) {
    return (
        <AuthProvider>
-           <App />
+           {children}
        </AuthProvider>
    );
 }

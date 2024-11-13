@@ -53,7 +53,7 @@ createRoot(document.getElementById('root')).render(
                   <Route path="/user" element={<User />} />
                   <Route path="/users" element={<Users />} />
                   <Route path="/sites" element={<Sites />} />
-                  <Route path="/site/:id" element={<Site />} />
+                  <Route path="/sites/:id" element={<Site />} />
                </Route>
             </Routes>
          </AppWrapper>

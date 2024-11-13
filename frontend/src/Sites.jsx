@@ -13,13 +13,13 @@ import Grid from '@mui/material/Grid2';
 
 const columns = [
   { field: 'id', headerName: 'ID', headerClassName: 'table-header', flex: 1, maxWidth: 100 },
-  { field: 'title', headerName: 'First name', headerClassName: 'table-header', flex: 1, },
-  { field: 'client', headerName: 'Last name', headerClassName: 'table-header', flex: 1, },
-  { field: 'location', headerName: 'Email', headerClassName: 'table-header', flex: 1, },
-  { field: 'start_date', headerName: 'Site', headerClassName: 'table-header', flex: 1, },
-  { field: 'end_date', headerName: 'Age', headerClassName: 'table-header', flex: 1, },
-  { field: 'status', headerName: 'Age', headerClassName: 'table-header', flex: 1, },
-  { field: 'director', headerName: 'Age', headerClassName: 'table-header', flex: 1, },
+  { field: 'title', headerName: 'Title', headerClassName: 'table-header', flex: 1, },
+  { field: 'client', headerName: 'Client', headerClassName: 'table-header', flex: 1, },
+  { field: 'location', headerName: 'Location', headerClassName: 'table-header', flex: 1, },
+  { field: 'start_date', headerName: 'Start Date', headerClassName: 'table-header', flex: 1, },
+  { field: 'end_date', headerName: 'End Date', headerClassName: 'table-header', flex: 1, },
+  { field: 'status', headerName: 'Status', headerClassName: 'table-header', flex: 1, },
+  { field: 'director', headerName: 'Director', headerClassName: 'table-header', flex: 1, },
   {
     field: 'buttons', headerName: '', headerClassName: 'table-header', flex: 1,
     renderCell: (params) => (<CellButtons id={params.id} />)

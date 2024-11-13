@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { siteService } from "./api/sites";
 import { userService } from './api/users';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
 import Grid from '@mui/material/Grid2';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -11,12 +13,24 @@ import CardHeader from '@mui/material/CardHeader';
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { List, ListItem, ListItemText, Divider, Typography } from "@mui/material";
+import { List, ListItem, ListItemText, Divider, Typography, Checkbox } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SiteModal from "./SiteModal";
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+
+import dayjs from "dayjs";
 
 export default function Site() {
-    const { id } = useParams();
+    //Modal states
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
+    const { id } = useParams();
+    const navigate = useNavigate();
+
+    //API calls
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [siteData, setSiteData] = useState(null);
@@ -31,8 +45,8 @@ export default function Site() {
                     title: site.title,
                     client: site.client,
                     location: site.location,
-                    start_date: site.start_date,
-                    end_date: site.end_date,
+                    start_date: dayjs(site.start_date).format('YYYY-MM-DD'),
+                    end_date: site.end_date ? dayjs(site.end_date).format('YYYY-MM-DD') : '',
                     status: site.status,
                     director: site.director,
                 });
@@ -118,7 +132,7 @@ export default function Site() {
                                                         switch (key) {
                                                             case 'status':
                                                                 if (value=='not_started') return 'Not started'
-                                                                return value.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+                                                                return value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
                                                             default:
                                                                 return value;
                                                         }
@@ -135,10 +149,19 @@ export default function Site() {
 
                         </CardContent>
                         <CardActions>
-                            <Stack>
-                                <IconButton aria-label="edit" color="primary" onClick={() => console.log('Editing')}>
+                            <Stack spacing={2} direction='row'>
+                                <IconButton aria-label="edit" color='primary' onClick={handleOpen}>
                                     <EditIcon />
                                 </IconButton>
+
+                                <IconButton aria-label="delete" sx={{color:'red'}} onClick={handleOpen}>
+                                    <DeleteIcon />
+                                </IconButton>
+                                
+                                <IconButton aria-label="reports" color='secondary' onClick={() => navigate('/reports')}>
+                                    <InsertDriveFileIcon />
+                                </IconButton>
+                                <SiteModal open={open} handleClose={handleClose} site={siteData}/>
                             </Stack>
                         </CardActions>
                     </Card>

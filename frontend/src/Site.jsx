@@ -4,6 +4,8 @@ import { siteService } from "./api/sites";
 import { userService } from './api/users';
 import { Link, useNavigate } from "react-router-dom";
 
+import SelectAllTransferList from "./Components/SelectAllTransferList";
+import SiteModal from "./Modals/SiteModal";
 
 import Grid from '@mui/material/Grid2';
 import Card from '@mui/material/Card';
@@ -13,10 +15,9 @@ import CardHeader from '@mui/material/CardHeader';
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { List, ListItem, ListItemText, Divider, Typography, Checkbox } from "@mui/material";
+import { List, ListItem, ListItemText, Divider, Typography } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import SiteModal from "./SiteModal";
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
 import dayjs from "dayjs";
@@ -170,15 +171,15 @@ export default function Site() {
                 <Grid size={8}>
                     <Card variant='outlined'>
                         <CardHeader title="Assigned Users"
+                            subheader="Users currently assigned to this site"
                             titleTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
+                            subheaderTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold' }}
                         />
                         <CardContent>
-                            <div>
-                                Users List
-                            </div>
+                                <SelectAllTransferList siteID={id} />
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Card Action Button</Button>
+                            <Button size="small">Confirm Changes</Button>
                         </CardActions>
                     </Card>
                 </Grid>

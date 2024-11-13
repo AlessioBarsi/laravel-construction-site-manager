@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { format } from 'date-fns';
-import CellButtons from './CellButtons';
+import CellButtons from './Components/CellButtons';
 import { siteService } from './api/sites';
 
 import { DataGrid } from '@mui/x-data-grid';

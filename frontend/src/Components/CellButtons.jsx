@@ -3,8 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { AccountCircle } from "@mui/icons-material";
-import { userService } from "./api/users";
-import ConfirmModal from "./ConfirmModal";
+import { userService } from "../api/users";
+import ConfirmModal from "../Modals/ConfirmModal";
 import { useNavigate } from 'react-router-dom';
 
 export default function CellButtons({ id }) {

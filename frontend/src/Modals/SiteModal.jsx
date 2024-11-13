@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { userService } from './api/users';
-import { siteService } from './api/sites';
+import { userService } from '../api/users';
+import { siteService } from '../api/sites';
 
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -44,9 +44,7 @@ export default function SiteModal({ open, handleClose, site }) {
           id: user.id,
           first_name: user.first_name,
           last_name: user.last_name,
-          email: user.email,
           site: user.site,
-          created_at: user.created_at,
         }));
         setUsers(user);
 

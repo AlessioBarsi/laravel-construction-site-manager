@@ -28,4 +28,8 @@ class ConstructionSite extends Model
     {
         return $this->hasMany(Report::Class);
     }
+    public function users()
+    {
+        return $this->hasMany(User::Class);
+    }
 }

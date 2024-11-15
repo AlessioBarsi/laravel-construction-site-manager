@@ -34,7 +34,8 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
             'role' => 'required|exists:roles,id',
             'reports' => 'array',
-            'reports.*' => 'exists:reports,id'
+            'reports.*' => 'exists:reports,id',
+            'site' => 'exists:construction_sites,id',
         ]);
 
         if ($validator->fails()) {
@@ -66,7 +67,8 @@ class UserController extends Controller
                 'password' => 'sometimes|required|string|min:8',
                 'role' => 'sometimes|required|exists:roles,id',
                 'reports' => 'sometimes|required|array',
-                'reports.*' => 'exists:reports,id'
+                'reports.*' => 'exists:reports,id',
+                'site' => 'exists:construction_sites,id',
             ]);
     
             if ($validator->fails()) {

@@ -12,6 +12,7 @@ import User from './User.jsx';
 import Site from './Site.jsx';
 import Sites from './Sites.jsx';
 import Users from './Users.jsx';
+import Home from './Home.jsx';
 import './index.css';
 
 // Set axios to a window property for easy access
@@ -48,6 +49,7 @@ createRoot(document.getElementById('root')).render(
             <Routes>
                <Route path="/" element={<Header />}>
                   <Route index element={<App />} />
+                  <Route path="/home" element={<Home />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/user" element={<User />} />

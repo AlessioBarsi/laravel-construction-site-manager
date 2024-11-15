@@ -55,8 +55,22 @@ export default function SelectAllTransferList({ siteID }) {
     //useEffect(() => { console.log('Users:', users); }, [users]);
 
     const [checked, setChecked] = useState([]);
-    const [left, setLeft] = useState([0, 1, 2, 3]);
-    const [right, setRight] = useState([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]);
+    const [right, setRight] = useState([]);
+
+    const [left, setLeft] = useState([]);
+    useEffect(() => {
+        let userNames = users.filter(user=> (user.site && user.site==siteID))
+        .map(user => `${user.first_name} ${user.last_name}`);
+        users.map( user =>
+            (user.site && user.site==siteID) ? console.log('Y') : console.log('N'));
+        setRight(userNames);
+
+        userNames = users.filter(user=> !(user.site && user.site==siteID))
+        .map(user => `${user.first_name} ${user.last_name}`);
+        users.map( user =>
+            (user.site && user.site==siteID) ? console.log('Y') : console.log('N'));
+        setLeft(userNames);
+    }, [users]);
 
     const leftChecked = intersection(checked, left);
     const rightChecked = intersection(checked, right);
@@ -119,7 +133,7 @@ export default function SelectAllTransferList({ siteID }) {
             <Divider />
             <List
                 sx={{
-                    width: 200,
+                    width: 350,
                     height: 230,
                     bgcolor: 'background.paper',
                     overflow: 'auto',
@@ -147,7 +161,7 @@ export default function SelectAllTransferList({ siteID }) {
                                     }}
                                 />
                             </ListItemIcon>
-                            <ListItemText id={labelId} primary={`List item ${value + 1}`} />
+                            <ListItemText id={labelId} primary={value} />
                         </ListItemButton>
                     );
                 })}

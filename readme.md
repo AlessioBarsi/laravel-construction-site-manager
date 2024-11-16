@@ -4,9 +4,9 @@ A web application to manage and oversee construction projects, built with a Lara
 
 ## Features
 
-- User submitted reports of their daily work activities
-- Issues and activity management
-- Overview of assigned users to existing projects
+- User submitted reports of their daily work activities, with the possibility of file attachments
+- Issues and activities management
+- Management and overview of assigned users to existing projects
 - User authorization depending on role
 
 ## Installation
@@ -19,12 +19,12 @@ A web application to manage and oversee construction projects, built with a Lara
 
 2. ### **Install dependencies:**
 
-    For the Laravel backend, the following dependencies are required:
+    The following dependencies are required before setting up the webapp:
 
-    * [PHP 8.2 or newer](https://www.php.net/downloads)
+    * [PHP 8.2 or newer](https://www.php.net/downloads) along with php-xml, php-dom and php-sqlite3 extensions
     * [Composer](https://getcomposer.org/)
+    * [NodeJS](https://nodejs.org/en/download/package-manager)
 
-    The the php-xml, php-dom and php-sqlite3 extensions are needed as well.
     Inside the *backend/* directory, composer must be run once after cloning the repo:
     ```sh
     cd backend/
@@ -61,6 +61,7 @@ A web application to manage and oversee construction projects, built with a Lara
 
     In the project root folder, run
     ```sh
+    cd ..
     start.sh
     ```
 
@@ -70,7 +71,7 @@ A web application to manage and oversee construction projects, built with a Lara
 * Your account details can be changed from your user profile page, which can be accessed from the home screen
 * Other users can be given admin permissions at `/users` page
 * You can add a new construction site at `/sites`
-* Click the site details button in `/sites` to view the relative details page in order to assign workers
+* Click the site details button in `/sites` to view the relative details page in order to assign workers to it
 * New reports can be easily submitted from the home page
 
 Start managing your construction projects efficiently!

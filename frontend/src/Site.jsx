@@ -23,13 +23,13 @@ import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import dayjs from "dayjs";
 
 export default function Site() {
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     //Modal states
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-    const { id } = useParams();
-    const navigate = useNavigate();
 
     //API calls
     const [loading, setLoading] = useState(true);
@@ -83,6 +83,9 @@ export default function Site() {
 
     }, [siteData]);
 
+    const changeUsers = () => {
+
+    }
     //useEffect(() => { console.log('Director:', directorData); }, [directorData]);
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -179,7 +182,7 @@ export default function Site() {
                                 <SelectAllTransferList siteID={id} />
                         </CardContent>
                         <CardActions>
-                            <Button size="small">Confirm Changes</Button>
+                            <Button onClick={changeUsers} size="small">Confirm Changes</Button>
                         </CardActions>
                     </Card>
                 </Grid>

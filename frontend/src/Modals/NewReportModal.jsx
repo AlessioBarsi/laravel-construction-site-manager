@@ -34,15 +34,16 @@ export default function NewReportModal({ open, handleClose, user }) {
         >
             <Box sx={style}>
                 <Stack spacing={2} direction="row">
-                    <FormControl>
-                        <TextField id="description" label="Description" variant="outlined" required />
+                    <FormControl fullWidth>
+                            <TextField id="description" label="Description" variant="outlined" required multiline />
+
                     </FormControl>
                 </Stack>
 
                 <Stack spacing={2} direction="row" sx={{ mt: 2 }}>
                     <TextField id="site" label="Site" variant="outlined" required />
                     <TextField id="author" label="Author" variant="outlined" required />
-                    <FormControlLabel control={<Switch/>} label="Critical Problem" />
+                    <FormControlLabel control={<Switch />} label="Critical Problem" />
                 </Stack>
 
                 <Stack spacing={2} direction="row" sx={{ mt: 2 }}>

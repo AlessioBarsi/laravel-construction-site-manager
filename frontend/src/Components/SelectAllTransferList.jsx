@@ -52,19 +52,19 @@ export default function SelectAllTransferList({ siteID }) {
         };
         fetchUsers();
     }, [siteID]);
-    //useEffect(() => { console.log('Users:', users); }, [users]);
 
     const [checked, setChecked] = useState([]);
     const [right, setRight] = useState([]);
 
     const [left, setLeft] = useState([]);
     useEffect(() => {
+        //Assigned users
         let userNames = users.filter(user=> (user.site && user.site==siteID))
         .map(user => `${user.first_name} ${user.last_name}`);
         users.map( user =>
             (user.site && user.site==siteID) ? console.log('Y') : console.log('N'));
         setRight(userNames);
-
+        //Not assigned users
         userNames = users.filter(user=> !(user.site && user.site==siteID))
         .map(user => `${user.first_name} ${user.last_name}`);
         users.map( user =>

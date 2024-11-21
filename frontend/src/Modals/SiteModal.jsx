@@ -159,21 +159,6 @@ export default function SiteModal({ open, handleClose, site }) {
                 </Select>
               </FormControl>
 
-              {/*<FormControl fullWidth>
-                <InputLabel id="director-label">Director</InputLabel>
-                <Select
-                  labelId="director-label"
-                  id="director"
-                  value={director}
-                  label="Director"
-                  onChange={handleChangeDirector}
-                >
-                  {users.map((user) => (
-                    <MenuItem key={user.id} value={user.id}>{user.first_name} {user.last_name}</MenuItem>
-                  ))}
-                </Select>
-                  </FormControl>*/}
-
               <Autocomplete
                 onChange={handleChangeDirector}
                 disablePortal

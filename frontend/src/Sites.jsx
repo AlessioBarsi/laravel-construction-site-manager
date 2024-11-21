@@ -22,7 +22,7 @@ const columns = [
   { field: 'director', headerName: 'Director', headerClassName: 'table-header', flex: 1, },
   {
     field: 'buttons', headerName: '', headerClassName: 'table-header', flex: 1,
-    renderCell: (params) => (<CellButtons id={params.id} />)
+    renderCell: (params) => (<CellButtons type='site' id={params.id} />)
   }
 ];
 

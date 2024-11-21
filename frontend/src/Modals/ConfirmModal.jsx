@@ -16,7 +16,7 @@ const style = {
   p: 4,
 };
 
-export default function ConfirmModal({ open, handleClose, id, onResult }) {
+export default function ConfirmModal({ open, handleClose, title, subtitle, onResult }) {
   const handleYes = () => { 
     onResult(true); 
   };
@@ -34,20 +34,17 @@ export default function ConfirmModal({ open, handleClose, id, onResult }) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Delete user?
+            {title}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2, mb : 2 }}>
-            User #{id} will be deleted
+            {subtitle}
           </Typography>
           <Stack spacing={2} direction="row">
             <Button onClick={handleYes} sx={{bgcolor : 'green'}} variant="contained">Yes</Button>
             <Button onClick={handleNo} sx={{bgcolor : 'red'}} variant="contained">No</Button>
           </Stack>
-
         </Box>
-
       </Modal>
-
     </div>
   );
 }

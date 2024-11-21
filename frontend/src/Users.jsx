@@ -25,7 +25,7 @@ const columns = [
     }, flex : 1
   },
   { field: 'buttons', headerName: '', headerClassName: 'table-header', flex: 1,
-   renderCell: (params) => ( <CellButtons id={params.id}/> ) 
+   renderCell: (params) => ( <CellButtons type='user' id={params.id}/> ) 
   }
 ];
 
@@ -90,7 +90,6 @@ export default function Users() {
             </CardActions>
           </Card>
         </Grid>
-
       </Grid>
     </div>
   );

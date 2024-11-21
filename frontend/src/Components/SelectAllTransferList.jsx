@@ -24,7 +24,7 @@ function union(a, b) {
     return [...a, ...not(b, a)];
 }
 
-export default function SelectAllTransferList({ siteID }) {
+export default function SelectAllTransferList({ siteID, onChangeUsers }) {
 
     //API calls
     const [users, setUsers] = useState([]);
@@ -55,22 +55,23 @@ export default function SelectAllTransferList({ siteID }) {
 
     const [checked, setChecked] = useState([]);
     const [right, setRight] = useState([]);
-
     const [left, setLeft] = useState([]);
+
     useEffect(() => {
         //Assigned users
-        let userNames = users.filter(user=> (user.site && user.site==siteID))
-        .map(user => `${user.first_name} ${user.last_name}`);
-        users.map( user =>
-            (user.site && user.site==siteID) ? console.log('Y') : console.log('N'));
+        let userNames = users.filter(user => (user.site && user.site == siteID))
+            .map(user => `${user.first_name} ${user.last_name} •${user.id}`);
         setRight(userNames);
         //Not assigned users
-        userNames = users.filter(user=> !(user.site && user.site==siteID))
-        .map(user => `${user.first_name} ${user.last_name}`);
-        users.map( user =>
-            (user.site && user.site==siteID) ? console.log('Y') : console.log('N'));
+        userNames = users.filter(user => !(user.site && user.site == siteID))
+            .map(user => `${user.first_name} ${user.last_name} •${user.id}`);
         setLeft(userNames);
+        onChangeUsers([left, right]);
     }, [users]);
+
+    useEffect(() => {
+        onChangeUsers([left, right]);
+    }, [left, right]);
 
     const leftChecked = intersection(checked, left);
     const rightChecked = intersection(checked, right);
@@ -161,7 +162,7 @@ export default function SelectAllTransferList({ siteID }) {
                                     }}
                                 />
                             </ListItemIcon>
-                            <ListItemText id={labelId} primary={value} />
+                            <ListItemText id={labelId} primary={value.split('•')[0]} />
                         </ListItemButton>
                     );
                 })}

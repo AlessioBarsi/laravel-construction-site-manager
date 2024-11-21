@@ -26,6 +26,9 @@ export default function Site() {
     const { id } = useParams();
     const navigate = useNavigate();
 
+    //Assigned users
+    const [assignedUsers, setAssignedUsers] = useState([]);
+
     //Modal states
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -83,9 +86,29 @@ export default function Site() {
 
     }, [siteData]);
 
-    const changeUsers = () => {
-
+    //Assigned users
+    const handleChangeUsers = (changedUsers) => {
+        setAssignedUsers(changedUsers);
     }
+    const updateAssignedUsers = async () => {
+        if (assignedUsers[0], assignedUsers[1]){
+            let notAssigned = assignedUsers[0].map(value => value.split('•')[1]);
+            let assigned = assignedUsers[1].map(value => value.split('•')[1]);
+            let userData = {
+                'users_assign':assigned,
+                'users_noassign': notAssigned,
+                'site': id
+            }
+            try {
+                const updatedUsers = await userService.bulkUpdateSite(userData);
+                console.log(JSON.stringify(updatedUsers, null, 2));
+            } catch (error) {
+                console.log(error)
+            }
+            
+        };
+    }
+
     //useEffect(() => { console.log('Director:', directorData); }, [directorData]);
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -179,10 +202,10 @@ export default function Site() {
                             subheaderTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold' }}
                         />
                         <CardContent>
-                                <SelectAllTransferList siteID={id} />
+                                <SelectAllTransferList onChangeUsers={handleChangeUsers} siteID={id} />
                         </CardContent>
                         <CardActions>
-                            <Button onClick={changeUsers} size="small">Confirm Changes</Button>
+                            <Button onClick={updateAssignedUsers} size="small">Confirm Changes</Button>
                         </CardActions>
                     </Card>
                 </Grid>

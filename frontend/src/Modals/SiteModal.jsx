@@ -94,7 +94,7 @@ export default function SiteModal({ open, handleClose, site }) {
       } return acc;
     }, {});
 
-    console.log(JSON.stringify(formData, null, 2));
+    //console.log(JSON.stringify(formData, null, 2));
     try {
       const updatedSite = await siteService.updateSite(site.id, filteredData);
       console.log(JSON.stringify(updatedSite, null, 2));

@@ -38,6 +38,16 @@ export const userService = {
         }
     },
 
+    // Bulk site Update
+    bulkUpdateSite: async (userData) => {
+        try {
+            const response = await api.put(`/users/bulk-site-update`, userData);
+            return response.data;
+        } catch (error) {
+            throw error.response?.data || error.message;
+        }
+    },
+
     // Update user
     updateUser: async (id, userData) => {
         try {
@@ -56,5 +66,6 @@ export const userService = {
         } catch (error) {
             throw error.response?.data || error.message;
         }
-    }
+    },
+
 };

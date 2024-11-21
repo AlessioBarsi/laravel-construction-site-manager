@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -64,9 +65,12 @@ export default function SiteModal({ open, handleClose, site }) {
     setFormData((prevData) => ({ ...prevData, status: event.target.value, }));
   };
   const [director, setDirector] = useState(site.director);
-  const handleChangeDirector = (event) => {
-    setDirector(event.target.value);
-    setFormData((prevData) => ({ ...prevData, director: event.target.value }));
+
+  const handleChangeDirector = (event, value) => {
+    if (value) {
+      setDirector(value.id);
+      setFormData((prevData) => ({ ...prevData, director: value.id }));
+    }
   };
 
   //Buttons
@@ -74,6 +78,7 @@ export default function SiteModal({ open, handleClose, site }) {
     handleClose();
   };
 
+  //formData handling
   const [formData, setFormData] = useState({
     title: site.title || '',
     client: site.client || '',
@@ -122,7 +127,6 @@ export default function SiteModal({ open, handleClose, site }) {
     }
   };
 
-
   return (
     <div>
       <Modal
@@ -140,7 +144,7 @@ export default function SiteModal({ open, handleClose, site }) {
             </Stack>
 
             <Stack spacing={2} sx={{ mt: 2 }} direction="row">
-              <FormControl fullWidth>
+              <FormControl sx={{width:'50%'}}>
                 <InputLabel id="status-label">Status</InputLabel>
                 <Select
                   labelId="status-label"
@@ -155,7 +159,7 @@ export default function SiteModal({ open, handleClose, site }) {
                 </Select>
               </FormControl>
 
-              <FormControl fullWidth>
+              {/*<FormControl fullWidth>
                 <InputLabel id="director-label">Director</InputLabel>
                 <Select
                   labelId="director-label"
@@ -168,7 +172,15 @@ export default function SiteModal({ open, handleClose, site }) {
                     <MenuItem key={user.id} value={user.id}>{user.first_name} {user.last_name}</MenuItem>
                   ))}
                 </Select>
-              </FormControl>
+                  </FormControl>*/}
+
+              <Autocomplete
+                onChange={handleChangeDirector}
+                disablePortal
+                options={users.map((user) => ({ label: `${user.first_name} ${user.last_name}`, id: user.id }))}
+                sx={{ width: '50%' }}
+                renderInput={(params) => <TextField {...params} label="Director" />}
+              />
             </Stack>
 
             <Stack spacing={2} direction="row" sx={{ mt: 2 }}>
@@ -177,7 +189,6 @@ export default function SiteModal({ open, handleClose, site }) {
                   <DatePicker id="start_date" required
                     onChange={(newValue, e) => handleChange({ target: { id: 'start_date' } }, newValue)}
                     label="Start Date"
-                    //defaultValue={dayjs(site.start_date)}
                     defaultValue={dayjs(formData.start_date)}
                   />
                 </DemoContainer>

@@ -54,9 +54,8 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function site()
-    {
-        return $this->belongsTo(ConstructionSite::class);
+    public function constructionSite() {
+         return $this->belongsTo(ConstructionSite::class, 'site'); // Specify 'site' as the foreign key }
     }
 
     public function directors()

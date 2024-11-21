@@ -39,6 +39,7 @@ Route::delete('/roles/{id}', [RoleController::Class, 'destroy']);
 Route::get('/users', [UserController::Class, 'index']);
 Route::get('/users/{id}', [UserController::Class, 'show']);
 Route::post('/users', [UserController::Class, 'store']);
+Route::put('/users/bulk-site-update', [UserController::Class, 'bulkSiteUpdate']);
 Route::put('/users/{id}', [UserController::Class, 'update']);
 Route::delete('/users/{id}', [UserController::Class, 'destroy']);
 

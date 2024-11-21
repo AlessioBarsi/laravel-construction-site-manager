@@ -28,8 +28,7 @@ class ConstructionSite extends Model
     {
         return $this->hasMany(Report::Class);
     }
-    public function users()
-    {
-        return $this->hasMany(User::Class);
+    public function users() {
+        return $this->hasMany(User::class, 'site'); // Specify 'site' as the foreign key 
     }
 }

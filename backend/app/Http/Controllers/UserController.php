@@ -77,6 +77,7 @@ class UserController extends Controller
                 'reports' => 'sometimes|required|array',
                 'reports.*' => 'exists:reports,id',
                 'site' => 'exists:construction_sites,id',
+                'admin' => 'boolean'
             ]);
 
             if ($validator->fails()) {

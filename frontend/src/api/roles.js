@@ -7,61 +7,51 @@ const api = axios.create({
     }
 });
 
-export const userService = {
-    // Get all users
-    getUsers: async () => {
+export const roleService = {
+    // Get all roles
+    getRoles: async () => {
         try {
-            const response = await api.get('/users');
+            const response = await api.get('/roles');
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
         }
     },
 
-    // Get single user
-    getUser: async (id) => {
+    // Get single role
+    getRole: async (id) => {
         try {
-            const response = await api.get(`/users/${id}`);
+            const response = await api.get(`/roles/${id}`);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
         }
     },
 
-    // Create user
-    createUser: async (userData) => {
+    // Create role
+    createRole: async (roleData) => {
         try {
-            const response = await api.post('/users', userData);
+            const response = await api.post('/roles', roleData);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
         }
     },
 
-    // Bulk site Update
-    bulkUpdateSite: async (userData) => {
+    // Update role
+    updateRole: async (id, roleData) => {
         try {
-            const response = await api.put(`/users/bulk-site-update`, userData);
+            const response = await api.put(`/roles/${id}`, roleData);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;
         }
     },
 
-    // Update user
-    updateUser: async (id, userData) => {
+    // Delete role
+    deleteRole: async (id) => {
         try {
-            const response = await api.put(`/users/${id}`, userData);
-            return response.data;
-        } catch (error) {
-            throw error.response?.data || error.message;
-        }
-    },
-
-    // Delete user
-    deleteUser: async (id) => {
-        try {
-            const response = await api.delete(`/users/${id}`);
+            const response = await api.delete(`/roles/${id}`);
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;

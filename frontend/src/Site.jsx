@@ -19,10 +19,10 @@ import { List, ListItem, ListItemText, Divider, Typography } from "@mui/material
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
-
 import dayjs from "dayjs";
 
 export default function Site() {
+
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -149,7 +149,7 @@ export default function Site() {
                                             />
                                             {key == 'director' ? (
                                                 <Typography style={{color:'blue'}}>
-                                                   <Link color='primary' to={`/user/${siteData.director}`}>
+                                                   <Link color='primary' to={`/users/${siteData.director}`}>
                                                      {directorData ? `${directorData.first_name} ${directorData.last_name}` : 'Loading director...'} 
                                                      </Link>
                                                 </Typography>

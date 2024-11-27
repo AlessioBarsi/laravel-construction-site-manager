@@ -35,7 +35,7 @@ export default function CellButtons({ id, type }) {
     return (
         <div>
             <Stack direction="row" spacing={1}>
-                <IconButton aria-label="account" onClick={() => navigate(`/${type}s/${id}`)}>
+                <IconButton aria-label="account" color='primary' onClick={() => navigate(`/${type}s/${id}`)}>
                     {   type=='user' ? <AccountCircle /> : <Foundation />}
                 </IconButton>
                 <IconButton aria-label="delete" onClick={handleOpen} sx={{ color: 'red' }}>

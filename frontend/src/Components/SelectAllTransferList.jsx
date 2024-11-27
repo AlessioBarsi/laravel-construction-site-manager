@@ -134,8 +134,8 @@ export default function SelectAllTransferList({ siteID, onChangeUsers }) {
             <Divider />
             <List
                 sx={{
-                    width: 350,
-                    height: 230,
+                    width: 500,
+                    height: 500,
                     bgcolor: 'background.paper',
                     overflow: 'auto',
                 }}

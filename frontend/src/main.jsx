@@ -20,7 +20,7 @@ window.axios = axios;
 // Default headers for API calls
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // Base URL for your API calls
-window.axios.defaults.baseURL = 'http://127.0.0.1:8000/api/';
+window.axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 
 // If a token exists in local storage, set it in axios authorization header
 const token = localStorage.getItem('token');

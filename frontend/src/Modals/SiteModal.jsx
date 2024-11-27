@@ -144,7 +144,7 @@ export default function SiteModal({ open, handleClose, site }) {
             </Stack>
 
             <Stack spacing={2} sx={{ mt: 2 }} direction="row">
-              <FormControl sx={{width:'50%'}}>
+              <FormControl sx={{ width: '50%' }}>
                 <InputLabel id="status-label">Status</InputLabel>
                 <Select
                   labelId="status-label"
@@ -165,6 +165,11 @@ export default function SiteModal({ open, handleClose, site }) {
                 options={users.map((user) => ({ label: `${user.first_name} ${user.last_name}`, id: user.id }))}
                 sx={{ width: '50%' }}
                 renderInput={(params) => <TextField {...params} label="Director" />}
+                defaultValue={(() => {
+                  const selectedDirector = users.find(user => user.id === site.director);
+                  return selectedDirector ? { label: `${selectedDirector.first_name} ${selectedDirector.last_name}`, id: site.director } : null;
+                })()
+                }
               />
             </Stack>
 

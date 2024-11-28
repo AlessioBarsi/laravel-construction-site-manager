@@ -10,6 +10,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext.jsx';
 
 export default function Home() {
     //Modal states
@@ -18,6 +19,7 @@ export default function Home() {
     const handleOpen = () => setOpen(true);
     const navigate = useNavigate();
 
+    const { userId, logout } = useAuth();
     return (
         <div className='mt-5 ml-10 mr-10'>
             <Grid container spacing={20}>

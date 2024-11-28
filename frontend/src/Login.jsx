@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "./AuthContext";
+import axios from "axios";
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -13,8 +14,8 @@ export default function Login() {
         event.preventDefault();
         axios.post('/login', { email, password })
         .then(response => {
-            login(response.data.token);
-            navigate('/dashboard');
+            login(response.data.token, response.data.userId);
+            navigate('/home');
         })
         .catch(error => {
             if (error.response && error.response.status === 422) {

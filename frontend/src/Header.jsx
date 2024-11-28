@@ -15,6 +15,8 @@ function classNames(...classes) {
 }
 
 export default function Header() {
+  const { logout } = useAuth();
+
   return (
     <main>
     <Disclosure as="nav" className="bg-orange-500 mb-2">

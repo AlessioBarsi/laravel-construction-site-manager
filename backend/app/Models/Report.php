@@ -11,8 +11,12 @@ class Report extends Model
     use HasFactory;
 
     protected $fillable = [
-        'sending_date',
-        'sending_check',
+        'description',
+        'problem',
+        'critical',
+        'problem_description',
+        'solution',
+        'image_path',
         'site'
     ];
 
@@ -20,12 +24,6 @@ class Report extends Model
     {
         return $this->belongsTo(ConstructionSite::class);
     }
-
-    public function report_lines()
-    {
-        return $this->hasMany(ReportLine::class);
-    }
-
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_is_on_sites');

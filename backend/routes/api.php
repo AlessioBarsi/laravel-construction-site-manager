@@ -7,7 +7,6 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConstructionSiteController;
 use App\Http\Controllers\ReportController;
-use App\Http\Controllers\ReportLineController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -56,10 +55,3 @@ Route::get('/reports/{id}', [ReportController::Class, 'show']);
 Route::post('/reports', [ReportController::Class, 'store']);
 Route::put('/reports/{id}', [ReportController::Class, 'update']);
 Route::delete('/reports/{id}', [ReportController::Class, 'destroy']);
-
-//ReportLine
-Route::get('/report-lines', [ReportLineController::Class, 'index']);
-Route::get('/report-lines/{id}', [ReportLineController::Class, 'show']);
-Route::post('/report-lines', [ReportLineController::Class, 'store']);
-Route::put('/report-lines/{id}', [ReportLineController::Class, 'update']);
-Route::delete('/report-lines/{id}', [ReportLineController::Class, 'destroy']);

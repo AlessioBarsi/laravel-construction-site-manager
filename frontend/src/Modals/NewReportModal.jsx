@@ -23,7 +23,7 @@ export default function NewReportModal({ open, handleClose, user }) {
     //formData handling
     const [formData, setFormData] = useState({
         description: '',
-        //site: user.site || '',
+        site: user.site || '',
         problem: 0,
         critical_problem: 0,
         problem_description: '',

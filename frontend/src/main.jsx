@@ -15,6 +15,7 @@ import Users from './Users.jsx';
 import Home from './Home.jsx';
 import Profile from './Profile.jsx';
 import './index.css';
+import { PrivateRoute } from './PrivateRoute.jsx';
 
 // Set axios to a window property for easy access
 window.axios = axios;
@@ -37,7 +38,7 @@ axios.interceptors.response.use(
          localStorage.removeItem('token');
          axios.defaults.headers.common['Authorization'] = 'Bearer';
          // Redirect to login route
-         return <Redirect to="/login" />;
+         //return <Redirect to="/login" />;
       }
       return Promise.reject(error);
    }
@@ -48,16 +49,19 @@ createRoot(document.getElementById('root')).render(
       <BrowserRouter>
          <AppWrapper>
             <Routes>
-               <Route path="/" element={<Header />}>
-                  <Route index element={<App />} />
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/profile" element={<Profile/>}/>
-                  <Route path="/users" element={<Users />} />
-                  <Route path="/users/:id" element={<User />} />
-                  <Route path="/sites" element={<Sites />} />
-                  <Route path="/sites/:id" element={<Site />} />
+               <Route path="/login" element={<Login />} />
+
+                  <Route element={<PrivateRoute/>}>
+                  <Route path="/" element={<Header />}>
+                     <Route index element={<App />} />
+                     <Route path="/home" element={<Home />} />
+                     <Route path="/about" element={<About />} />
+                     <Route path="/profile" element={<Profile/>}/>
+                     <Route path="/users" element={<Users />} />
+                     <Route path="/users/:id" element={<User />} />
+                     <Route path="/sites" element={<Sites />} />
+                     <Route path="/sites/:id" element={<Site />} />
+                  </Route>
                </Route>
             </Routes>
          </AppWrapper>

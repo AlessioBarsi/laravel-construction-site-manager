@@ -24,14 +24,14 @@ class ReportController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'description' => 'required|text',
+            'description' => 'required|string',
             'site' => 'required|exists:construction_sites,id',
             'users' => 'required|array',
             'users.*' => 'exists:users,id',
             'problem' => 'sometimes|boolean',
-            'problem_description' => 'sometimes|text',
+            'problem_description' => 'sometimes|string',
             'critical' => 'sometimes|boolean',
-            'solution' => 'sometimes|text',
+            'solution' => 'sometimes|string',
         ]);
 
         if ($validator->fails()) {
@@ -70,14 +70,14 @@ class ReportController extends Controller
         if ($report){
 
             $validator = Validator::make($request->all(), [
-                'description' => 'sometimes|text',
+                'description' => 'sometimes|string',
                 'site' => 'sometimes|exists:construction_sites,id',
                 'users' => 'sometimes|array',
                 'users.*' => 'exists:users,id',
                 'problem' => 'sometimes|boolean',
-                'problem_description' => 'sometimes|text',
+                'problem_description' => 'sometimes|string',
                 'critical' => 'sometimes|boolean',
-                'solution' => 'sometimes|text',
+                'solution' => 'sometimes|string',
             ]);
 
             if ($validator->fails()) {

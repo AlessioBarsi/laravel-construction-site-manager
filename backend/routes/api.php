@@ -48,6 +48,7 @@ Route::get('/construction-sites/{id}', [ConstructionSiteController::Class, 'show
 Route::post('/construction-sites', [ConstructionSiteController::Class, 'store']);
 Route::put('/construction-sites/{id}', [ConstructionSiteController::Class, 'update']);
 Route::delete('/construction-sites/{id}', [ConstructionSiteController::Class, 'destroy']);
+Route::get('/construction-sites/get-users/{id}', [ConstructionSiteController::Class, 'getUsers']);
 
 //Report
 Route::get('/reports', [ReportController::Class, 'index']);

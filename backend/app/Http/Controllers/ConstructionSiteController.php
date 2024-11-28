@@ -6,7 +6,7 @@ use App\Models\ConstructionSite;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Log;
 
 class ConstructionSiteController extends Controller
 {
@@ -107,6 +107,18 @@ class ConstructionSiteController extends Controller
         if ($site){
             $site->delete();
             return response()->json(['message' => 'Site deleted'], 200);
+        } else {
+            return response()->json(['message' => 'Site not found'], 404);
+        }
+    }
+
+    //Get all users assigned to this site
+    public function getUsers($id)
+    {
+        $site = ConstructionSite::find($id);
+        if ($site){
+            $users = $site->users()->get();
+            return response()->json($users, 200);
         } else {
             return response()->json(['message' => 'Site not found'], 404);
         }

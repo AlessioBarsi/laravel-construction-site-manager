@@ -129,7 +129,6 @@ export default function UserEditModal({ open, handleClose, user }) {
             console.log(JSON.stringify(updatedUser, null, 2));
             handleClose();
             window.location.reload();
-            console.log(filteredData)
         } catch (error) {
             console.log(error);
         }

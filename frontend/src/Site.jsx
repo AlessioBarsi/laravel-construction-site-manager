@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import SelectAllTransferList from "./Components/SelectAllTransferList";
 import SiteModal from "./Modals/SiteModal";
+import ConfirmModal from "./Modals/ConfirmModal";
 
 import Grid from '@mui/material/Grid2';
 import Card from '@mui/material/Card';
@@ -29,7 +30,27 @@ export default function Site() {
     //Assigned users
     const [assignedUsers, setAssignedUsers] = useState([]);
 
-    //Modal states
+    //Confirm Modal
+    const [openConfirm, setOpenConfirm] = useState(false);
+    const handleOpenConfirm = () => setOpenConfirm(true);
+    const handleCloseConfirm = () => setOpenConfirm(false);
+    const [, setModalResultConfirm] = useState(null);
+    const handleModalResultConfirm = (result) => {
+        setModalResultConfirm(result);
+        handleCloseConfirm();
+        if (result) {
+            handleDelete(id);
+        };
+    };
+    const handleDelete = async () => {
+        try {
+            await siteService.deleteSite(id);
+            window.location.reload();
+        } catch (err) {
+            console.log(err)
+        }
+    };
+    //Site Modal
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -181,13 +202,17 @@ export default function Site() {
                                     <EditIcon />
                                 </IconButton>
 
-                                <IconButton aria-label="delete" sx={{color:'red'}} onClick={handleOpen}>
+                                <IconButton aria-label="delete" sx={{color:'red'}} onClick={handleOpenConfirm}>
                                     <DeleteIcon />
                                 </IconButton>
                                 
                                 <IconButton aria-label="reports" color='secondary' onClick={() => navigate('/reports')}>
                                     <InsertDriveFileIcon />
                                 </IconButton>
+                                <ConfirmModal open={openConfirm} handleClose={handleCloseConfirm} 
+                                    title={`Confirm Deletion?`} subtitle={`Site #${id} will be deleted`} 
+                                    onResult={handleModalResultConfirm}
+                                />
                                 <SiteModal open={open} handleClose={handleClose} site={siteData}/>
                             </Stack>
                         </CardActions>

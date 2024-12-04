@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function CellButtons({ id, type }) {
     const [open, setOpen] = useState(false);
-    const [modalResult, setModalResult] = useState(null);
+    const [, setModalResult] = useState(null);
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);

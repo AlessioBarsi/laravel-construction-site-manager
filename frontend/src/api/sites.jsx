@@ -51,5 +51,14 @@ export const siteService = {
         } catch (error) {
             throw error.response?.data || error.message;
         }
+    },
+
+    getUsers: async (id) => {
+        try {
+            const response = await api.get(`/construction-sites/get-users/${id}`);
+            return response.data;
+        } catch (error) {
+            throw error.response?.data || error.message;
+        }
     }
 };

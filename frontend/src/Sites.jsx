@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { format } from 'date-fns';
 import CellButtons from './Components/CellButtons';
 import { siteService } from './api/sites';
 
@@ -26,7 +25,7 @@ const columns = [
   }
 ];
 
-export default function Users() {
+export default function Sites() {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);

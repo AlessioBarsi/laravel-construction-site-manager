@@ -3,7 +3,6 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import About from "./About.jsx";
 import AppWrapper from './App.jsx';
 import App from './App.jsx';
 import Header from './Header.jsx';
@@ -14,6 +13,7 @@ import Sites from './Sites.jsx';
 import Users from './Users.jsx';
 import Home from './Home.jsx';
 import Profile from './Profile.jsx';
+import Reports from './Reports.jsx';
 import './index.css';
 import { PrivateRoute } from './PrivateRoute.jsx';
 
@@ -37,8 +37,6 @@ axios.interceptors.response.use(
       if (error.response?.status === 401) {
          localStorage.removeItem('token');
          axios.defaults.headers.common['Authorization'] = 'Bearer';
-         // Redirect to login route
-         //return <Redirect to="/login" />;
       }
       return Promise.reject(error);
    }
@@ -55,8 +53,8 @@ createRoot(document.getElementById('root')).render(
                   <Route path="/" element={<Header />}>
                      <Route index element={<App />} />
                      <Route path="/home" element={<Home />} />
-                     <Route path="/about" element={<About />} />
                      <Route path="/profile" element={<Profile/>}/>
+                     <Route path="/reports" element={<Reports />}/>
                      <Route path="/users" element={<Users />} />
                      <Route path="/users/:id" element={<User />} />
                      <Route path="/sites" element={<Sites />} />

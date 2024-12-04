@@ -29,7 +29,7 @@ const style = {
   p: 4,
 };
 
-export default function SiteModal({ open, handleClose, site }) {
+export default function SiteModal({ open, handleClose, site, newSite = false }) {
 
   //API calls
   const [users, setUsers] = useState([]);
@@ -64,7 +64,7 @@ export default function SiteModal({ open, handleClose, site }) {
     setStatus(event.target.value);
     setFormData((prevData) => ({ ...prevData, status: event.target.value, }));
   };
-  const [director, setDirector] = useState(site.director);
+  const [director, setDirector] = useState(newSite ? null : site.director);
 
   const handleChangeDirector = (event, value) => {
     if (value) {
@@ -79,7 +79,7 @@ export default function SiteModal({ open, handleClose, site }) {
   };
 
   //formData handling
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState(site ? {
     title: site.title || '',
     client: site.client || '',
     location: site.location || '',
@@ -87,26 +87,39 @@ export default function SiteModal({ open, handleClose, site }) {
     director: site.director || '',
     start_date: dayjs(site.start_date).format('YYYY-MM-DD') || '',
     end_date: site.end_date ? dayjs(site.end_date).format('YYYY-MM-DD') : null,
-  });
+  } : { status: 'open' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Filter out empty fields 
-    const filteredData = Object.entries(formData).reduce((acc, [key, value]) => {
-      if (value) {
-        acc[key] = value;
-      } return acc;
-    }, {});
+    if (newSite) {
+      if (formData.director && formData.status && formData.start_date) {
+        try {
+          const createdSite = await siteService.createSite(formData);
+          console.log(JSON.stringify(createdSite, null, 2));
+          handleClose();
+          //window.location.reload();
+        } catch (error) {
+          console.log(error);
+        }
+      }
 
-    //console.log(JSON.stringify(formData, null, 2));
-    try {
-      const updatedSite = await siteService.updateSite(site.id, filteredData);
-      console.log(JSON.stringify(updatedSite, null, 2));
-      handleClose();
-      window.location.reload();
-    } catch (error) {
-      console.log(error);
+    } else {
+      // Filter out empty fields 
+      const filteredData = Object.entries(formData).reduce((acc, [key, value]) => {
+        if (value) {
+          acc[key] = value;
+        } return acc;
+      }, {});
+
+      try {
+        const updatedSite = await siteService.updateSite(site.id, filteredData);
+        console.log(JSON.stringify(updatedSite, null, 2));
+        handleClose();
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -138,9 +151,9 @@ export default function SiteModal({ open, handleClose, site }) {
         <Box sx={style}>
           <form onSubmit={handleSubmit}>
             <Stack spacing={2} direction="row">
-              <TextField id="title" label="Title" variant="outlined" onChange={handleChange} defaultValue={site.title} required />
-              <TextField id="client" label="Client" variant="outlined" onChange={handleChange} defaultValue={site.client} required />
-              <TextField id="location" label="Location" variant="outlined" onChange={handleChange} defaultValue={site.location} required />
+              <TextField id="title" label="Title" variant="outlined" onChange={handleChange} defaultValue={newSite ? '' : site.title} required />
+              <TextField id="client" label="Client" variant="outlined" onChange={handleChange} defaultValue={newSite ? '' : site.client} required />
+              <TextField id="location" label="Location" variant="outlined" onChange={handleChange} defaultValue={newSite ? '' : site.location} required />
             </Stack>
 
             <Stack spacing={2} sx={{ mt: 2 }} direction="row">
@@ -149,7 +162,7 @@ export default function SiteModal({ open, handleClose, site }) {
                 <Select
                   labelId="status-label"
                   id="status"
-                  defaultValue={site.status}
+                  defaultValue={newSite ? 'open' : site.status}
                   label="Status"
                   onChange={handleChangeStatus}
                 >
@@ -166,7 +179,7 @@ export default function SiteModal({ open, handleClose, site }) {
                 sx={{ width: '50%' }}
                 renderInput={(params) => <TextField {...params} label="Director" />}
                 defaultValue={(() => {
-                  const selectedDirector = users.find(user => user.id === site.director);
+                  const selectedDirector = newSite ? null : users.find(user => user.id === site.director);
                   return selectedDirector ? { label: `${selectedDirector.first_name} ${selectedDirector.last_name}`, id: site.director } : null;
                 })()
                 }
@@ -179,7 +192,7 @@ export default function SiteModal({ open, handleClose, site }) {
                   <DatePicker id="start_date" required
                     onChange={(newValue, e) => handleChange({ target: { id: 'start_date' } }, newValue)}
                     label="Start Date"
-                    defaultValue={dayjs(formData.start_date)}
+                    defaultValue={site && site.start_date ? dayjs(formData.start_date) : null}
                   />
                 </DemoContainer>
               </LocalizationProvider>
@@ -189,7 +202,7 @@ export default function SiteModal({ open, handleClose, site }) {
                   <DatePicker id="end_date"
                     onChange={(newValue, e) => handleChange({ target: { id: 'end_date' } }, newValue)}
                     label="End Date"
-                    defaultValue={site.end_date ? dayjs(site.end_date) : null}
+                    defaultValue={site && site.end_date ? dayjs(site.end_date) : null}
                   />
                 </DemoContainer>
               </LocalizationProvider>

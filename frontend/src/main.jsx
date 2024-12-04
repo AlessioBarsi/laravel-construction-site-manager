@@ -14,6 +14,7 @@ import Users from './Users.jsx';
 import Home from './Home.jsx';
 import Profile from './Profile.jsx';
 import Reports from './Reports.jsx';
+import Report from './Report.jsx';
 import './index.css';
 import { PrivateRoute } from './PrivateRoute.jsx';
 
@@ -55,6 +56,7 @@ createRoot(document.getElementById('root')).render(
                      <Route path="/home" element={<Home />} />
                      <Route path="/profile" element={<Profile/>}/>
                      <Route path="/reports" element={<Reports />}/>
+                     <Route path="/reports/:id" element={<Report />}/>
                      <Route path="/users" element={<Users />} />
                      <Route path="/users/:id" element={<User />} />
                      <Route path="/sites" element={<Sites />} />

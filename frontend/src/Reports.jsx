@@ -25,12 +25,12 @@ export default function Reports() {
             }, flex: 1
         },
         { field: 'site', headerName: 'Site', headerClassName: 'table-header',
-            valueFormatter: (params) => {
+            renderCell: (params) => {
                 let siteTitle = 'Loading...';
-                if (!loading && fetchedSites.find(site => site.id === params)) { 
-                    siteTitle = (fetchedSites.find(site => site.id === params)).title;
+                if (!loading && fetchedSites.find(site => site.id === params.value)) { 
+                    siteTitle = (fetchedSites.find(site => site.id === params.value)).title;
                 }
-                return siteTitle;
+                return <Link style={{color:'blue'}} to={`/sites/${params.value}`}>{siteTitle}</Link>;
             },
             flex: 1, 
         },

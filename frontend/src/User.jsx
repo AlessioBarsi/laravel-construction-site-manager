@@ -210,7 +210,6 @@ export default function User() {
 
                 <Grid size={8}>
                     <div>
-                        Test
                     </div>
                 </Grid>
             </Grid>

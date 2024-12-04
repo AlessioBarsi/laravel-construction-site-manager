@@ -2,28 +2,17 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { siteService } from "./api/sites";
 import { reportService } from "./api/reports";
-import { userService } from "./api/users";
-import { Link, useNavigate } from "react-router-dom";
-import { format } from 'date-fns';
+import { Link } from "react-router-dom";
 
 import Grid from '@mui/material/Grid2';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import Stack from "@mui/material/Stack";
-import { List, ListItem, ListItemText, Divider, Typography } from "@mui/material";
+import { List, ListItem, ListItemText, Divider } from "@mui/material";
 import dayjs from "dayjs";
 
 export default function Report() {
-
     const { id } = useParams();
-    const navigate = useNavigate();
-
-    //Modal states
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     //API calls
     const [loading, setLoading] = useState(true);
@@ -81,11 +70,6 @@ export default function Report() {
         }
     }, [reportData]);
 
-    useEffect(() => {
-        console.log(usersData);
-    }, [usersData])
-
-    //useEffect(() => { console.log('Director:', directorData); }, [directorData]);
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
 

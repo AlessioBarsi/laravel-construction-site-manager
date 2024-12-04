@@ -17,7 +17,6 @@ const columns = [
   { field: 'last_name', headerName: 'Last name', headerClassName: 'table-header', flex : 1, },
   { field: 'email', headerName: 'Email', headerClassName: 'table-header', flex : 1, },
   { field: 'site', headerName: 'Site', headerClassName: 'table-header', flex : 1, },
-  { field: 'age', headerName: 'Age', headerClassName: 'table-header', flex : 1,  },
   {
     field: 'created_at', headerName: 'Created at', headerClassName: 'table-header',
     valueFormatter: (params) => {

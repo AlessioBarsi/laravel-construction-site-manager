@@ -105,10 +105,20 @@ class ReportController extends Controller
     public function destroy($id)
     {
         $report = Report::find($id);
-
         if ($report){
             $report->delete();
             return response()->json(['message' => 'Report deleted'], 200);
+        } else {
+            return response()->json(['message' => 'Report not found'], 404);
+        }
+    }
+
+    public function getUsers($id)
+    {
+        $report = Report::find($id);
+        if ($report){
+            $users = $report->users()->get();
+            return response()->json($users, 200);
         } else {
             return response()->json(['message' => 'Report not found'], 404);
         }

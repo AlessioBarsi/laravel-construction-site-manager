@@ -56,3 +56,4 @@ Route::get('/reports/{id}', [ReportController::Class, 'show']);
 Route::post('/reports', [ReportController::Class, 'store']);
 Route::put('/reports/{id}', [ReportController::Class, 'update']);
 Route::delete('/reports/{id}', [ReportController::Class, 'destroy']);
+Route::get('/reports/get-users/{id}', [ReportController::Class, 'getUsers']);

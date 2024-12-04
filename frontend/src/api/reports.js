@@ -58,4 +58,13 @@ export const reportService = {
         }
     },
 
+    //Get associated users
+    getUsers: async (id) => {
+        try {
+            const response = await api.get(`/reports/get-users/${id}`);
+            return response.data;
+        } catch (error) {
+            throw error.response?.data || error.message;
+        }
+    },
 };

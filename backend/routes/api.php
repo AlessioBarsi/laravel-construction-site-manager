@@ -41,6 +41,7 @@ Route::post('/users', [UserController::Class, 'store']);
 Route::put('/users/bulk-site-update', [UserController::Class, 'bulkSiteUpdate']);
 Route::put('/users/{id}', [UserController::Class, 'update']);
 Route::delete('/users/{id}', [UserController::Class, 'destroy']);
+Route::put('/users/change-password/{id}', [UserController::Class, 'changePassword']);
 
 //ConstructionSite
 Route::get('/construction-sites', [ConstructionSiteController::Class, 'index']);

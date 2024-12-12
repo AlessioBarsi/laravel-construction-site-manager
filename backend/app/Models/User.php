@@ -64,11 +64,6 @@ class User extends Authenticatable
         return $this->hasMany(ConstructionSite::class);
     }
 
-    public function authors()
-    {
-        return $this->hasMany(ReportLine::class);
-    }
-
     public function reports()
     {
         return $this->belongsToMany(User::class, 'user_is_on_sites');

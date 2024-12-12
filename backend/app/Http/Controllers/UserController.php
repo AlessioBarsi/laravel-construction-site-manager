@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use App\Models\ConstructionSite;
 use App\Http\Controllers\Controller;
 use Dotenv\Exception\ValidationException;
@@ -128,10 +129,8 @@ class UserController extends Controller
         $site = ConstructionSite::find($validatedData['site']);
         if ($site) {
             User::whereIn('id', $validatedData['users_assign'])->update(['site' => $validatedData['site']]);
-            //Log::info(json_encode($site->users()));
             $site_users = $site->users()->get();
 
-            //Log::info(json_encode($site_users->get()));
             foreach ($site_users as $u) {
                 if (in_array($u->id, $validatedData['users_noassign'])) {
                     //Set the value of 'site' filed to null
@@ -141,6 +140,25 @@ class UserController extends Controller
             return response()->json(['message' => 'Users site has been updated'], 201);
         } else {
             return response()->json(['message' => 'Site not found'], 404);
+        }
+    }
+
+    public function changePassword(Request $request, $id)
+    {
+        $user = User::find($id);
+        if ($user) {
+            if (Auth::attempt(credentials: $request->only('email', 'password'))) {
+                $validatedData = $request->validate([
+                    'password' => 'required|string',
+                    'new_password' => 'required|string',
+                ]);
+                $user->update(['password' => $validatedData['new_password']]);
+                return response(['message' => ('Password changed')], 200);
+            } else {
+                return response(['message' => __('auth.failed')], 422);
+            }
+        } else {
+            return response()->json(['message' => 'User not found'], 404);
         }
     }
 }

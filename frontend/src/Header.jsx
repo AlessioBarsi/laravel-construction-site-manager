@@ -34,9 +34,9 @@ export default function Header() {
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex flex-shrink-0 items-center">
               <img
-                alt="Your Company"
-                src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
-                className="h-8 w-auto"
+                alt="Logo"
+                src="/images/logo.png"
+                className="h-10 w-auto"
               />
             </div>
             <div className="hidden sm:ml-6 sm:block">
@@ -58,15 +58,6 @@ export default function Header() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button
-              type="button"
-              className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-            >
-              <span className="absolute -inset-1.5" />
-              <span className="sr-only">View notifications</span>
-              <BellIcon aria-hidden="true" className="h-8 w-8" />
-            </button>
-
             {/* Profile dropdown */}
             <Menu as="div" className="relative ml-3">
               <div>
@@ -82,16 +73,11 @@ export default function Header() {
                 className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in"
               >
                 <MenuItem>
-                  <Link to="#" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
+                  <Link to="/profile" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                     Your Profile
                   </Link>
                 </MenuItem>
-                <MenuItem>
-                  <Link to="#" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
-                    Settings
-                  </Link>
-                </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={() => logout()}>
                   <Link to="#" className="block px-4 py-2 text-sm text-gray-700 data-[focus]:bg-gray-100">
                     Sign out
                   </Link>

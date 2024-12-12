@@ -68,4 +68,14 @@ export const userService = {
         }
     },
 
+    //Change Password
+    changePassword: async (id, userData) => {
+        try {
+            const response = await api.put(`/users/change-password/${id}`, userData);
+            return response.data;
+        } catch (error) {
+            throw error.response?.data || error.message;
+        }
+    },
+
 };

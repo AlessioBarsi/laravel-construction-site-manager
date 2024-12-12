@@ -133,11 +133,11 @@ export default function Home() {
                         onClick={(() => {
                             switch (image.title) {
                                 case 'New Report':
-                                    return(() => handleOpen());
-                                case 'My Reports':
-                                    return(() => navigate('/profile'));
+                                    return (() => handleOpen());
                                 case 'Profile':
-                                    return(() => navigate('/reports'));
+                                    return (() => navigate('/profile'));
+                                case 'My Reports':
+                                    return (() => navigate('/reports'));
                                 default:
                                     break;
                             }
@@ -159,14 +159,14 @@ export default function Home() {
                                 })}
                             >
                                 {(() => {
-                                    const iconStyle = {mr:1}
+                                    const iconStyle = { mr: 1 }
                                     switch (image.title) {
                                         case 'New Report':
-                                            return (<EditIcon fontSize='large' sx={iconStyle}/>);
+                                            return (<EditIcon fontSize='large' sx={iconStyle} />);
                                         case 'Profile':
-                                            return (<AccountCircle fontSize='large' sx={iconStyle}/>);
+                                            return (<AccountCircle fontSize='large' sx={iconStyle} />);
                                         case 'My Reports':
-                                            return (<InsertDriveFileIcon fontSize='large' sx={iconStyle}/>);
+                                            return (<InsertDriveFileIcon fontSize='large' sx={iconStyle} />);
                                         default:
                                             break;
                                     }

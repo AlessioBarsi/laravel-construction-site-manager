@@ -172,7 +172,7 @@ export default function Reports() {
             <Grid container spacing={2}>
                 <Grid size={12}>
                     <Card variant='outlined'>
-                        <CardHeader title="Construction Site"
+                        <CardHeader title="Reports"
                             subheader="Filter options are available for each column"
                             titleTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
                             subheaderTypographyProps={{ variant: 'subtitle1', fontWeight: 'bold' }}

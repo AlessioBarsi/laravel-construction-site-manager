@@ -87,11 +87,11 @@ export default function NewReportModal({ open, handleClose, user }) {
                 console.log(error);
             }
         }
-
     }
 
     const handleAttachment = (event) => {
-        console.log('Handle File Upload')
+        console.log('Handle File Upload');
+        toast('WIP Feature')
     }
 
     const handleChange = (event) => {
@@ -138,7 +138,7 @@ export default function NewReportModal({ open, handleClose, user }) {
                     <FormControl sx={{ width: '70%' }}>
                         <TextField onChange={handleChange} disabled={isDisabled} id="solution" label="Proposed Solution" variant="outlined" multiline />
                     </FormControl>
-                    <Button onClick={handleAttachment} startIcon={<InsertPhotoIcon />} variant="contained">
+                    <Button disabled onClick={handleAttachment} startIcon={<InsertPhotoIcon />} variant="contained">
                         Upload files
                     </Button>
                 </Stack>

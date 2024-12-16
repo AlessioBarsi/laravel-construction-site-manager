@@ -1,10 +1,10 @@
 # Construction Site Manager
 
-A web application to manage and oversee construction projects, built with a Laravel backend and React+Vite frontend.
+A web application to manage and oversee construction projects and workers, built with a Laravel backend and React+Vite frontend.
 
 ## Features
 
-- User submitted reports of their daily work activities, with the possibility of file attachments
+- User submitted reports of their daily work activities, with the possibility of image attachments (**WIP**)
 - Issues and activities management
 - Management and overview of assigned users to existing projects
 - User authorization depending on role
@@ -19,7 +19,7 @@ A web application to manage and oversee construction projects, built with a Lara
 
 2. ### **Install dependencies:**
 
-    The following dependencies are required before setting up the webapp:
+    The following dependencies are required before setting up the application:
 
     * [PHP 8.2 or newer](https://www.php.net/downloads) along with php-xml, php-dom and php-sqlite3 extensions
     * [Composer](https://getcomposer.org/)
@@ -44,12 +44,10 @@ A web application to manage and oversee construction projects, built with a Lara
     php artisan migrate
     ```
 
-    Create your user account with admin permissions:
+    Run the following command to create your user account with admin permissions:
     ```sh
-    php artisan command ???
+    php artisan admin:create
     ```
-    **TODO: Make a command that creates a user with pw and email from commands argument**
-    It will create an account with your email and password.
 
     Lastly, install the required dependencies in *frontend/*:
     ```sh
@@ -67,17 +65,31 @@ A web application to manage and oversee construction projects, built with a Lara
 
 ## Usage
 
-* Access the application at http://localhost:5173/ and login with the previously created account.
-* Your account details can be changed from your user profile page, which can be accessed from the home screen
-* Other users can be given admin permissions at `/users` page
-* You can add a new construction site at `/sites`
-* Click the site details button in `/sites` to view the relative details page in order to assign workers to it
+* Access the application at http://localhost:5173/ and login with the previously created account credentials
+* Edit Account details and choose a role from the */profile* page, which can be accessed from */home*
+* Other users can be given a role and admin permissions at */user* page
+* You can add a new construction site at */sites*
+* Click the site details button in */sites* to view the relative details page in order to assign workers to it
 * New reports can be easily submitted from the home page
 
 Start managing your construction projects efficiently!
 
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.
+
+## Tech Stack
+Frameworks used:
+* [Laravel](https://laravel.com/) for the application backend
+* [React + Vite](https://vite.dev/) for the application frontend
+
+UI Libraries:
+* [Material UI](https://mui.com/material-ui/)
+* [TailwindCSS](https://tailwindcss.com/)
+* [react-hot-toast](https://www.npmjs.com/package/react-hot-toast)
+
+Other libraries:
+* [Axios](https://www.npmjs.com/package/axios)
+* [react-router-dom](https://www.npmjs.com/package/react-router-dom)
 
 ## License
 This project is licensed under the MIT License.

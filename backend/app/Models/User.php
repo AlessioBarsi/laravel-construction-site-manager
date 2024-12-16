@@ -68,4 +68,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'user_is_on_sites');
     }
+
+    public function reportsByAuthor()
+    {
+        return $this->hasMany(Report::class, 'author');
+    }
 }

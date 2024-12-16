@@ -17,7 +17,8 @@ class Report extends Model
         'problem_description',
         'solution',
         'image_path',
-        'site'
+        'site',
+        'author'
     ];
 
     public function site()
@@ -27,5 +28,9 @@ class Report extends Model
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_is_on_sites');
+    }
+    public function author()
+    {
+        return $this->belongsTo(User::class, 'author');
     }
 }

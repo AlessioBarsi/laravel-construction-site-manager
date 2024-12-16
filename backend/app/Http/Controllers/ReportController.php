@@ -32,6 +32,7 @@ class ReportController extends Controller
             'problem_description' => 'sometimes|string',
             'critical' => 'sometimes|boolean',
             'solution' => 'sometimes|string',
+            'author' => 'required|exists:users,id'
         ]);
 
         if ($validator->fails()) {
@@ -67,7 +68,7 @@ class ReportController extends Controller
     public function update(Request $request, $id)
     {
         $report = Report::find($id);
-        if ($report){
+        if ($report) {
 
             $validator = Validator::make($request->all(), [
                 'description' => 'sometimes|string',
@@ -78,6 +79,7 @@ class ReportController extends Controller
                 'problem_description' => 'sometimes|string',
                 'critical' => 'sometimes|boolean',
                 'solution' => 'sometimes|string',
+                'author' => 'sometime|exists:users,id',
             ]);
 
             if ($validator->fails()) {
@@ -91,7 +93,7 @@ class ReportController extends Controller
             $data = $request->only($report->getFillable());
             $report->users()->attach($request->users);
             $report->update($data);
-            
+
             return response()->json($report, 200);
 
         } else {
@@ -105,7 +107,7 @@ class ReportController extends Controller
     public function destroy($id)
     {
         $report = Report::find($id);
-        if ($report){
+        if ($report) {
             $report->delete();
             return response()->json(['message' => 'Report deleted'], 200);
         } else {
@@ -116,7 +118,7 @@ class ReportController extends Controller
     public function getUsers($id)
     {
         $report = Report::find($id);
-        if ($report){
+        if ($report) {
             $users = $report->users()->get();
             return response()->json($users, 200);
         } else {

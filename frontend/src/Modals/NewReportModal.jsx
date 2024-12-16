@@ -8,6 +8,7 @@ import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import CheckboxList from "../Components/CheckBoxList";
+import toast from "react-hot-toast";
 
 const style = {
     position: 'absolute',
@@ -29,6 +30,7 @@ export default function NewReportModal({ open, handleClose, user }) {
     const [formData, setFormData] = useState({
         description: '',
         site: 0,
+        author: 0,
         problem: 0,
         critical_problem: 0,
         problem_description: '',
@@ -38,7 +40,9 @@ export default function NewReportModal({ open, handleClose, user }) {
     });
 
     useEffect(() => {
-        if (user && user.site) {
+        if (user && user.site && user.id) {
+            //Set author to report
+            setFormData((prevData) => ({...prevData, author: user.id}))
             //Set site to report
             setFormData((prevData) => ({ ...prevData, site: user.site }));
             //Get users on site
@@ -63,9 +67,9 @@ export default function NewReportModal({ open, handleClose, user }) {
         event.preventDefault();
 
         if (!formData['description']) {
-            alert('Report description is requried')
+            toast.error('Report description is required');
         } else if (formData['users'].length == 0) {
-            alert('Assigned users are required')
+            toast.error('At least one user must be selected');
         } else {
             //Remove associated fields if there is no problem
             const filteredData = { ...formData };

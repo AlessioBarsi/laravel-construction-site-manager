@@ -206,7 +206,7 @@ export default function Site() {
                                     <DeleteIcon />
                                 </IconButton>
                                 
-                                <IconButton aria-label="reports" color='secondary' onClick={() => navigate('/reports')}>
+                                <IconButton aria-label="reports" color='secondary' onClick={() => navigate(`/reports?siteFilter=${id}`)}>
                                     <InsertDriveFileIcon />
                                 </IconButton>
                                 <ConfirmModal open={openConfirm} handleClose={handleCloseConfirm} 

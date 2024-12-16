@@ -12,11 +12,16 @@ import CardHeader from '@mui/material/CardHeader';
 import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import { ReportProblem, Image, Group } from "@mui/icons-material";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 
 export default function Reports() {
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+    const userFilter = searchParams.get('userFilter');
+    const siteFilter = searchParams.get('siteFilter');
+
     const columns = [
         { field: 'id', headerName: 'ID', headerClassName: 'table-header', flex: 1, maxWidth: 100 },
         {field: 'created_at', headerName: 'Date', headerClassName: 'table-header',
@@ -35,6 +40,15 @@ export default function Reports() {
             flex: 1, 
         },
         { field: 'description', headerName: 'Description', headerClassName: 'table-header', flex: 1, },
+        { field: 'author', headerName: 'Author', headerClassName: 'table-header', flex: 1, 
+            renderCell: (params) => {
+                let authorName = 'Loading...';
+                if (!loading && fetchedUsers.find(user => user.id === params.value)) {
+                    authorName = `${(fetchedUsers.find(user => user.id === params.value)).first_name} ${(fetchedUsers.find(user => user.id === params.value)).last_name}`;
+                }
+                return <Link style={{color:'blue'}} to={`/users/${params.value}`}>{authorName}</Link>;
+            }
+        },
         { field: 'problem', headerName: 'Problem Status', headerClassName: 'table-header', flex: 1,
             renderCell: (params) => {
                 if (params && params.value[0]) {
@@ -85,7 +99,16 @@ export default function Reports() {
         const fetchReports = async () => {
             try {
                 setLoading(true);
-                const reports = await reportService.getReports();
+                let reports = await reportService.getReports();
+                
+                if (userFilter && userFilter != 0) {
+                    reports = reports.filter(report => String(report.author) === String(userFilter));
+                }
+
+                if (siteFilter && siteFilter !=0) {
+                    reports = reports.filter(report => String(report.site) === String(siteFilter));
+                }
+
                 const formattedRows = reports.map(report => ({
                     id: report.id,
                     created_at: report.created_at,
@@ -96,6 +119,7 @@ export default function Reports() {
                     solution: report.solution,
                     image_path: report.image_path,
                     users: report.users,
+                    author: report.author,
                 }));
                 setRows(formattedRows);
 

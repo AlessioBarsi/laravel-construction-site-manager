@@ -137,7 +137,7 @@ export default function Home() {
                                 case 'Profile':
                                     return (() => navigate('/profile'));
                                 case 'My Reports':
-                                    return (() => navigate('/reports'));
+                                    return (() => navigate(`/reports?userFilter=${userId}`));
                                 default:
                                     break;
                             }

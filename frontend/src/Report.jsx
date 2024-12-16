@@ -10,6 +10,7 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import { List, ListItem, ListItemText, Divider } from "@mui/material";
 import dayjs from "dayjs";
+import { userService } from "./api/users";
 
 export default function Report() {
     const { id } = useParams();
@@ -20,6 +21,7 @@ export default function Report() {
     const [reportData, setReportData] = useState(null);
     const [siteData, setSiteData] = useState(null);
     const [usersData, setUsersData] = useState(null);
+    const [authorData, setAuthorData] = useState(null);
 
     useEffect(() => {
         const fetchReport = async () => {
@@ -67,6 +69,26 @@ export default function Report() {
                 }
             };
             fetchSite();
+        }
+    }, [reportData]);
+
+    //Author Data
+    useEffect(() => {
+        if (reportData && reportData.author) {
+
+            const fetchAuthor = async () => {
+                try {
+                    const author = await userService.getUser(reportData.author);
+                    setAuthorData(author);
+                }
+                catch (err) {
+                    console.log(err);
+                    setError(err.message)
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchAuthor();
         }
     }, [reportData]);
 
@@ -119,6 +141,14 @@ export default function Report() {
                                                             } else {
                                                                 return 'Loading Site..';
                                                             }
+                                                        case 'author':
+                                                            if (authorData) {
+                                                                return <Link to={`/users/${authorData.id}`} style={{ color: 'blue' }}>
+                                                                    {authorData.first_name} {authorData.last_name}
+                                                                </Link>
+                                                            } else {
+                                                                return 'Loading Author...'
+                                                            }
                                                         case 'problem':
                                                             return value ? 'Yes' : 'No problem';
                                                         case 'critical':
@@ -159,7 +189,7 @@ export default function Report() {
                                     return (
                                         <React.Fragment key={user.id}>
                                             <ListItem>
-                                                <Link style={{color:'blue'}} to={`/users/${user.id}`}>
+                                                <Link style={{ color: 'blue' }} to={`/users/${user.id}`}>
                                                     <ListItemText primary={`${user.first_name} ${user.last_name}`} />
                                                 </Link>
                                             </ListItem>

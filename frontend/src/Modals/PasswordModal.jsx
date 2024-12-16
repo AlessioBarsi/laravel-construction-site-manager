@@ -34,7 +34,7 @@ export default function PasswordModal({ userId, open, handleClose }) {
         'email': email,
       });
       console.log(JSON.stringify(updatedUser, null, 2));
-      //handleClose();
+      handleClose();
     } catch (error) {
       console.log(error.message);
       alert(error.message)

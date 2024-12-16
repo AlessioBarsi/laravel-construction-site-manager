@@ -15,6 +15,7 @@ import Home from './Home.jsx';
 import Profile from './Profile.jsx';
 import Reports from './Reports.jsx';
 import Report from './Report.jsx';
+import Register from './Register.jsx';
 import './index.css';
 import { PrivateRoute } from './PrivateRoute.jsx';
 
@@ -49,6 +50,7 @@ createRoot(document.getElementById('root')).render(
          <AppWrapper>
             <Routes>
                <Route path="/login" element={<Login />} />
+               <Route path="/register" element={<Register/>}/>
 
                   <Route element={<PrivateRoute/>}>
                   <Route path="/" element={<Header />}>

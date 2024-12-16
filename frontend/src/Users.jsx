@@ -108,9 +108,6 @@ export default function Users() {
                 />
               </div>
             </CardContent>
-            <CardActions>
-              <Button size="small">Card Action Button</Button>
-            </CardActions>
           </Card>
         </Grid>
       </Grid>

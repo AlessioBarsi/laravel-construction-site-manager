@@ -4,10 +4,16 @@ A web application to manage and oversee construction projects and workers, built
 
 ## Features
 
-- User submitted reports of their daily work activities, with the possibility of image attachments (**WIP**)
+- User submitted reports of their daily work activities
 - Issues and activities management
 - Management and overview of assigned users to existing projects
 - User authorization depending on role
+
+**WIP**:
+- Role views
+- Image upload and attachment to reports
+- Export reports as formatted .csv spreadsheet
+- Route protection from non-admin users
 
 ## Installation
 

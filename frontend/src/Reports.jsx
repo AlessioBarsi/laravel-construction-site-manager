@@ -191,9 +191,6 @@ export default function Reports() {
                                 />
                             </div>
                         </CardContent>
-                        <CardActions>
-                            <Button size="small">Card Action Button</Button>
-                        </CardActions>
                     </Card>
                 </Grid>
 

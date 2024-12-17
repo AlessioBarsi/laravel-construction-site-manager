@@ -37,6 +37,7 @@ export default function Profile() {
     const handleChange = (event) => {
         if (event.target.value != '') {
             setUserData((prevData) => ({ ...prevData, [event.target.id]: event.target.value, }));
+            
         }
     }
 

@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react';
 import NewReportModal from './Modals/NewReportModal.jsx';
 import { userService } from './api/users.jsx';
 
-import Button from '@mui/material/Button';
 import { styled } from '@mui/material/styles';
-import { ButtonBase, Box, Typography } from '@mui/material';
+import { ButtonBase, Box, Typography, Card } from '@mui/material';
 import { AccountCircle } from '@mui/icons-material';
 import EditIcon from '@mui/icons-material/Edit';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
@@ -121,7 +120,7 @@ export default function Home() {
     //#endregion
 
     return (
-        <div className='ml-5 mt-5 flex justify-between'>
+        <div className='mx-5 my-5 flex justify-between'>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
                 {images.map((image) => (
                     <ImageButton

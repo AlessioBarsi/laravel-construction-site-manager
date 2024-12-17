@@ -16,11 +16,12 @@ import CardHeader from '@mui/material/CardHeader';
 import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { List, ListItem, ListItemText, Divider, Typography } from "@mui/material";
+import { List, ListItem, ListItemText, Divider, Typography, CircularProgress } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import dayjs from "dayjs";
+import toast from "react-hot-toast";
 
 export default function Site() {
 
@@ -123,16 +124,18 @@ export default function Site() {
             try {
                 const updatedUsers = await userService.bulkUpdateSite(userData);
                 console.log(JSON.stringify(updatedUsers, null, 2));
+                toast.success(<div>Assigned users have been updated</div>);
             } catch (error) {
                 console.log(error)
+                toast.error(<div>An error occurred. Please try again</div>);
             }
             
         };
     }
 
     //useEffect(() => { console.log('Director:', directorData); }, [directorData]);
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error}</div>;
+    if (loading) return <div className='flex items-center justify-center h-screen'><CircularProgress/></div>;
+    if (error) return <div className='flex items-center justify-center h-screen'>Error: {error}</div>;
 
     return (
         <div className='ml-2 mr-2'>

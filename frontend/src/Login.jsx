@@ -28,10 +28,13 @@ export default function Login() {
         axios.post('/login', { email, password })
             .then(response => {
                 login(response.data.token, response.data.userId);
-                navigate('/home');
+                toast.success('Login successful!');
+                setTimeout(() => {
+                    navigate('/home');
+                }, 1500);
             })
             .catch(error => {
-                console.log('Caught Error:',error);
+                console.log('Caught Error:', error);
                 if (error.response && error.response.status === 422) {
                     toast.error(error.response.data.message);
                 }

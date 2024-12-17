@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import toast from 'react-hot-toast';
 
 const AuthContext = createContext();
 
@@ -42,7 +43,7 @@ export function AuthProvider({ children }) {
         localStorage.removeItem('token');
         setIsLoggedIn(false);
         setUserId(null);
-        alert('You logged out!')
+        toast('You logged out!')
     };
 
     return (

@@ -42,7 +42,7 @@ export default function NewReportModal({ open, handleClose, user }) {
     useEffect(() => {
         if (user && user.site && user.id) {
             //Set author to report
-            setFormData((prevData) => ({...prevData, author: user.id}))
+            setFormData((prevData) => ({ ...prevData, author: user.id }))
             //Set site to report
             setFormData((prevData) => ({ ...prevData, site: user.site }));
             //Get users on site
@@ -80,18 +80,27 @@ export default function NewReportModal({ open, handleClose, user }) {
             }
             console.log(filteredData);
             try {
+                if (filteredData.solution == ''){
+                    delete filteredData.solution;
+                }
                 const newReport = await reportService.createReport(filteredData);
                 console.log(JSON.stringify(newReport, null, 2));
-                handleClose();
+                toast.success('Report has been sent!')
+                setTimeout(() => {
+                    handleClose();
+                }, 3000);
             } catch (error) {
-                console.log(error);
+                console.log("Caught Error:", error)
+                Object.keys(error.errors).forEach((key) => {
+                    error.errors[key].forEach((err) => toast.error(<div><b>{key.charAt(0).toUpperCase() + key.slice(1)}</b><br/>{err}</div>));
+                });
             }
         }
     }
 
     const handleAttachment = (event) => {
         console.log('Handle File Upload');
-        toast('WIP Feature')
+        toast('WIP Feature');
     }
 
     const handleChange = (event) => {

@@ -17,6 +17,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import dayjs from 'dayjs';
+import toast from 'react-hot-toast';
 
 const style = {
   position: 'absolute',
@@ -97,10 +98,16 @@ export default function SiteModal({ open, handleClose, site, newSite = false }) 
         try {
           const createdSite = await siteService.createSite(formData);
           console.log(JSON.stringify(createdSite, null, 2));
+          toast.success('Site has been created');
           handleClose();
-          //window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
         } catch (error) {
-          console.log(error);
+          console.log("Caught Error:", error)
+          Object.keys(error.errors).forEach((key) => {
+            error.errors[key].forEach((err) => toast.error(<div><b>{key.charAt(0).toUpperCase() + key.slice(1)}</b><br />{err}</div>));
+          });
         }
       }
 
@@ -115,10 +122,16 @@ export default function SiteModal({ open, handleClose, site, newSite = false }) 
       try {
         const updatedSite = await siteService.updateSite(site.id, filteredData);
         console.log(JSON.stringify(updatedSite, null, 2));
+        toast.success('Site has been updated');
         handleClose();
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       } catch (error) {
-        console.log(error);
+        console.log("Caught Error:", error)
+        Object.keys(error.errors).forEach((key) => {
+          error.errors[key].forEach((err) => toast.error(<div><b>{key.charAt(0).toUpperCase() + key.slice(1)}</b><br />{err}</div>));
+        });
       }
     }
   };
@@ -209,7 +222,7 @@ export default function SiteModal({ open, handleClose, site, newSite = false }) 
             </Stack>
 
             <Stack spacing={2} direction="row" sx={{ mt: 2 }}>
-              <Button type='submit' sx={{ bgcolor: 'green' }} variant="contained">Update</Button>
+              <Button type='submit' sx={{ bgcolor: 'green' }} variant="contained">{newSite ? 'Add new site' : 'Update'}</Button>
               <Button onClick={handleCancel} sx={{ bgcolor: 'red' }} variant="contained">Cancel</Button>
             </Stack>
           </form>

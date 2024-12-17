@@ -32,6 +32,7 @@ export default function Register() {
                 setRoleData(roles);
             } catch (err) {
                 console.log(err)
+                toast("An error occurred while fetching roles");
             }
         }
         fetchRoles();
@@ -91,6 +92,7 @@ export default function Register() {
                             <TextField required type='text' id='first_name' label='First Name' onChange={handleChange} />
                             <TextField required type='text' id='last_name' label='Last Name' onChange={handleChange} />
                             <Autocomplete
+                                hidden
                                 onChange={handleChangeRole}
                                 disablePortal
                                 options={roleData ? roleData.map((role) => ({ label: `${role.name}`, id: role.id })) : []}

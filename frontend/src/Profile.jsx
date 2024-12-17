@@ -5,6 +5,7 @@ import { userService } from "./api/users.jsx";
 import TextField from '@mui/material/TextField';
 import { Button, Stack, Card, CardContent, CardHeader, CardActions } from "@mui/material";
 import PasswordModal from "./Modals/PasswordModal.jsx";
+import toast from "react-hot-toast";
 
 export default function Profile() {
 
@@ -37,7 +38,7 @@ export default function Profile() {
     const handleChange = (event) => {
         if (event.target.value != '') {
             setUserData((prevData) => ({ ...prevData, [event.target.id]: event.target.value, }));
-            
+
         }
     }
 
@@ -45,8 +46,12 @@ export default function Profile() {
         try {
             const updatedUser = await userService.updateUser(userId, userData);
             console.log(JSON.stringify(updatedUser, null, 2));
-        } catch (err) {
-            console.log(err)
+            toast.success('Profile credentials have been updated')
+        } catch (error) {
+            console.log(error);
+            Object.keys(error.errors).forEach((key) => {
+                error.errors[key].forEach((err) => toast.error(<div><b>{key.charAt(0).toUpperCase() + key.slice(1)}</b><br/>{err}</div>));
+            });
         }
         console.log(userData);
     }

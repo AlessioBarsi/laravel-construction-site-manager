@@ -201,16 +201,16 @@ export default function Report() {
                     </Card>
                 </Grid>
 
-                {reportData.problem_description ? <Grid size={8}>
+                <Grid size={8}>
                     <Card variant='outlined'>
                         <CardHeader title="Problem"
                             titleTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
                         />
                         <CardContent>
-                            <div>{reportData.problem_description}</div>
+                            <div>{reportData.problem_description ? reportData.problem_description : 'Not a problem'}</div>
                         </CardContent>
                     </Card>
-                </Grid> : null}
+                </Grid>
 
                 <Grid size={4}>
                     <Card variant='outlined'>
@@ -223,16 +223,16 @@ export default function Report() {
                     </Card>
                 </Grid>
 
-                {reportData.problem_solution ? <Grid size={8}>
+                <Grid size={8}>
                     <Card variant='outlined'>
                         <CardHeader title="Proposed Solution"
                             titleTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
                         />
                         <CardContent>
-                            <div>{reportData.problem_solution}</div>
+                            <div>{reportData.problem_solution ? reportData.problem_solution : 'Not a problem'}</div>
                         </CardContent>
                     </Card>
-                </Grid> : null}
+                </Grid>
             </Grid>
         </div>
     )

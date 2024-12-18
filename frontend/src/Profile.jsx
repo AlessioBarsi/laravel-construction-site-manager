@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 
 export default function Profile() {
 
-    const { userId } = useAuth();
+    const { userId, isLoading } = useAuth();
     //Modal states
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -19,6 +19,7 @@ export default function Profile() {
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         if (userId) {
+            console.log(userId, "found")
             const fetchUser = async () => {
                 try {
                     const user = await userService.getUser(userId);
@@ -35,10 +36,12 @@ export default function Profile() {
         }
     }, [userId]);
 
+    if (!userId) return (<div>Loading...</div>);
+
     const handleChange = (event) => {
         if (event.target.value != '') {
             setUserData((prevData) => ({ ...prevData, [event.target.id]: event.target.value, }));
-
+            
         }
     }
 
@@ -53,7 +56,6 @@ export default function Profile() {
                 error.errors[key].forEach((err) => toast.error(<div><b>{key.charAt(0).toUpperCase() + key.slice(1)}</b><br/>{err}</div>));
             });
         }
-        console.log(userData);
     }
 
     return (

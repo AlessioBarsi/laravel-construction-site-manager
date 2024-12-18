@@ -72,6 +72,7 @@ export default function NewReportModal({ open, handleClose, user }) {
         } else {
             //Remove associated fields if there is no problem
             const filteredData = { ...formData, 'critical':formData.critical_problem };
+            delete filteredData.critical_problem;
             if (isDisabled) {
                 delete filteredData.critical;
                 delete filteredData.problem_description;

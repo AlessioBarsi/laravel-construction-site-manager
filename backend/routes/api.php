@@ -18,8 +18,12 @@ Route::post('/login', function (Request $request) {
         return response(['message' => __('auth.failed')], 422);
     }
     
+    $user = auth()->user();
     $token = auth()->user()->createToken('client-app');
-    return ['token' => $token->plainTextToken];
+    return [
+        'token' => $token->plainTextToken,
+        'id' => $user->id,
+    ];
 });
 // Logout Route
 Route::middleware('auth:sanctum')->post('/logout', function (Request $request) {

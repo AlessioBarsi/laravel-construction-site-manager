@@ -26,12 +26,16 @@ export default function Login() {
     function handleSubmit(event) {
         event.preventDefault();
         axios.post('/login', { email, password })
-            .then(response => {
-                login(response.data.token, response.data.userId);
-                toast.success('Login successful!');
-                setTimeout(() => {
-                    navigate('/home');
-                }, 1500);
+            .then(async (response) => {
+                await login(response.data.token, response.data.id);
+                if (response.data.id) {
+                    toast.success('Login successful!');
+                    setTimeout(() => {
+                        navigate('/home');
+                    }, 1500);
+                } else {
+                    toast.error("Could not find userID");
+                }
             })
             .catch(error => {
                 console.log('Caught Error:', error);

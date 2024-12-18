@@ -23,6 +23,8 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
+        set_time_limit(180);  // This sets the script execution time limit to 120 seconds
+
         $validator = Validator::make($request->all(), [
             'description' => 'required|string',
             'site' => 'required|exists:construction_sites,id',
@@ -45,7 +47,7 @@ class ReportController extends Controller
 
         $data = $request->only((new Report)->getFillable());
         $report = Report::create($data);
-        $report->users()->attach($request->users);
+        $report->users()->sync($request->users);
         return response()->json($report, 201);
     }
 

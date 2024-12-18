@@ -65,16 +65,15 @@ export default function NewReportModal({ open, handleClose, user }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         if (!formData['description']) {
             toast.error('Report description is required');
         } else if (formData['users'].length == 0) {
             toast.error('At least one user must be selected');
         } else {
             //Remove associated fields if there is no problem
-            const filteredData = { ...formData };
+            const filteredData = { ...formData, 'critical':formData.critical_problem };
             if (isDisabled) {
-                delete filteredData.critical_problem;
+                delete filteredData.critical;
                 delete filteredData.problem_description;
                 delete filteredData.solution;
             }

@@ -19,7 +19,6 @@ export default function Profile() {
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         if (userId) {
-            console.log(userId, "found")
             const fetchUser = async () => {
                 try {
                     const user = await userService.getUser(userId);

@@ -6,17 +6,22 @@ import { userService } from './api/users';
 import { format } from 'date-fns';
 import { DataGrid } from '@mui/x-data-grid';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import Button from '@mui/material/Button';
 import Grid from '@mui/material/Grid2';
 import { ReportProblem, Image, Group } from "@mui/icons-material";
 import { Link, useLocation } from 'react-router-dom';
-
-
+import UserListModal from './Modals/UserListModal';
+import { IconButton } from '@mui/material';
 
 export default function Reports() {
+
+    //Modal
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    //URL params
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const userFilter = searchParams.get('userFilter');
@@ -76,7 +81,11 @@ export default function Reports() {
         { field: 'users', headerName: 'Users on Site', headerClassName: 'table-header', flex:1, 
             renderCell:(params) => {
                 if (params.value) {
-                    return <>{params.value.length} <Group color='primary'/> </>
+                    return <>
+                        {params.value.length} {" "}
+                        <IconButton onClick={handleOpen} color='primary'><Group/></IconButton>
+                        <UserListModal open={open} handleClose={handleClose} userList={params.value}/>
+                    </>
                 } else {
                     return <></>
                 }

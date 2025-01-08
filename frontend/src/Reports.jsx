@@ -9,17 +9,11 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid2';
-import { ReportProblem, Image, Group } from "@mui/icons-material";
+import { ReportProblem, Image } from "@mui/icons-material";
 import { Link, useLocation } from 'react-router-dom';
 import UserListModal from './Modals/UserListModal';
-import { IconButton } from '@mui/material';
 
 export default function Reports() {
-
-    //Modal
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
     //URL params
     const location = useLocation();
@@ -29,36 +23,40 @@ export default function Reports() {
 
     const columns = [
         { field: 'id', headerName: 'ID', headerClassName: 'table-header', flex: 1, maxWidth: 100 },
-        {field: 'created_at', headerName: 'Date', headerClassName: 'table-header',
+        {
+            field: 'created_at', headerName: 'Date', headerClassName: 'table-header',
             valueFormatter: (params) => {
                 return format(params, 'yyyy-MM-dd HH:mm');
             }, flex: 1
         },
-        { field: 'site', headerName: 'Site', headerClassName: 'table-header',
+        {
+            field: 'site', headerName: 'Site', headerClassName: 'table-header',
             renderCell: (params) => {
                 let siteTitle = 'Loading...';
-                if (!loading && fetchedSites.find(site => site.id === params.value)) { 
+                if (!loading && fetchedSites.find(site => site.id === params.value)) {
                     siteTitle = (fetchedSites.find(site => site.id === params.value)).title;
                 }
-                return <Link style={{color:'blue'}} to={`/sites/${params.value}`}>{siteTitle}</Link>;
+                return <Link style={{ color: 'blue' }} to={`/sites/${params.value}`}>{siteTitle}</Link>;
             },
-            flex: 1, 
+            flex: 1,
         },
         { field: 'description', headerName: 'Description', headerClassName: 'table-header', flex: 1, },
-        { field: 'author', headerName: 'Author', headerClassName: 'table-header', flex: 1, 
+        {
+            field: 'author', headerName: 'Author', headerClassName: 'table-header', flex: 1,
             renderCell: (params) => {
                 let authorName = 'Loading...';
                 if (!loading && fetchedUsers.find(user => user.id === params.value)) {
                     authorName = `${(fetchedUsers.find(user => user.id === params.value)).first_name} ${(fetchedUsers.find(user => user.id === params.value)).last_name}`;
                 }
-                return <Link style={{color:'blue'}} to={`/users/${params.value}`}>{authorName}</Link>;
+                return <Link style={{ color: 'blue' }} to={`/users/${params.value}`}>{authorName}</Link>;
             }
         },
-        { field: 'problem', headerName: 'Problem Status', headerClassName: 'table-header', flex: 1,
+        {
+            field: 'problem', headerName: 'Problem Status', headerClassName: 'table-header', flex: 1,
             renderCell: (params) => {
                 if (params && params.value[0]) {
-                    if (params.value[1]){
-                        return <ReportProblem sx={{color:'red'}}/>
+                    if (params.value[1]) {
+                        return <ReportProblem sx={{ color: 'red' }} />
                     } else {
                         return <ReportProblem />
                     }
@@ -66,25 +64,25 @@ export default function Reports() {
                     return <div>No Problem</div>
                 }
             }
-         },
+        },
         { field: 'problem_description', headerName: 'Problem Description', headerClassName: 'table-header', flex: 1, },
         { field: 'solution', headerName: 'Solution', headerClassName: 'table-header', flex: 1, },
-        { field: 'image_path', headerName: 'Image', headerClassName: 'table-header', flex: 1,
+        {
+            field: 'image_path', headerName: 'Image', headerClassName: 'table-header', flex: 1,
             renderCell: (params) => {
                 if (params.value) {
-                    return <Image color='primary'/>
+                    return <Image color='primary' />
                 } else {
                     return <></>
                 }
-            } 
+            }
         },
-        { field: 'users', headerName: 'Users on Site', headerClassName: 'table-header', flex:1, 
-            renderCell:(params) => {
+        {
+            field: 'users', headerName: 'Users on Site', headerClassName: 'table-header', flex: 1,
+            renderCell: (params) => {
                 if (params.value) {
                     return <>
-                        {params.value.length} {" "}
-                        <IconButton onClick={handleOpen} color='primary'><Group/></IconButton>
-                        <UserListModal open={open} handleClose={handleClose} userList={params.value}/>
+                        <UserListModal userList={params.value} />
                     </>
                 } else {
                     return <></>
@@ -109,12 +107,12 @@ export default function Reports() {
             try {
                 setLoading(true);
                 let reports = await reportService.getReports();
-                
+
                 if (userFilter && userFilter != 0) {
                     reports = reports.filter(report => String(report.author) === String(userFilter));
                 }
 
-                if (siteFilter && siteFilter !=0) {
+                if (siteFilter && siteFilter != 0) {
                     reports = reports.filter(report => String(report.site) === String(siteFilter));
                 }
 

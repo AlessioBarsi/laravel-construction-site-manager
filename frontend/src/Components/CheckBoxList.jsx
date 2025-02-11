@@ -6,7 +6,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Checkbox from '@mui/material/Checkbox';
 
-export default function CheckboxList({ items, onChangeItems }) {
+export default function CheckBoxList({ items, onChangeItems }) {
     const [renderedItems, setRenderedItems] = useState([]);
     const [checked, setChecked] = useState([]);
 

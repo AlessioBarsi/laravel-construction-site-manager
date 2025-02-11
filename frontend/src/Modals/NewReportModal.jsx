@@ -7,7 +7,7 @@ import { Card, CardHeader, CardContent, Modal, TextField, Stack, Box, FormContro
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import CheckboxList from "../Components/CheckBoxList";
+import CheckBoxList from "../Components/CheckBoxList";
 import toast from "react-hot-toast";
 
 const style = {
@@ -156,7 +156,7 @@ export default function NewReportModal({ open, handleClose, user }) {
                     <Card variant='outlined'>
                         <CardHeader title="Users for this report" titleTypographyProps={{ variant: 'h6', fontWeight: 'bold' }} />
                         <CardContent>
-                            <CheckboxList items={usersOnSite} onChangeItems={handleChangeUsers} />
+                            <CheckBoxList items={usersOnSite} onChangeItems={handleChangeUsers} />
                         </CardContent>
                     </Card>
                 </Stack>

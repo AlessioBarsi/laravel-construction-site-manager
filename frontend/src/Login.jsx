@@ -25,7 +25,7 @@ export default function Login() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        axios.post('/login', { email, password })
+        axios.post(`${import.meta.env.VITE_API_URL}/login`, { email, password })
             .then(async (response) => {
                 await login(response.data.token, response.data.id);
                 if (response.data.id) {

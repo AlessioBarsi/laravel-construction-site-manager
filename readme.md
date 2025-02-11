@@ -55,13 +55,18 @@ A web application to manage and oversee construction projects and workers, built
     php artisan admin:create
     ```
 
-    Lastly, install the required dependencies in *frontend/*:
+    Install the required dependencies in *frontend/*:
     ```sh
     cd ../frontend/
     npm install
     ```
 
-3. ### **Run the application:**
+    Create the .env file
+    ```sh
+    cp .env.example .env
+    ```
+
+4. ### **Run the application:**
 
     In the project root folder, run
     ```sh
@@ -79,6 +84,19 @@ A web application to manage and oversee construction projects and workers, built
 * New reports can be easily submitted from the home page
 
 Start managing your construction projects efficiently!
+
+## Screenshots
+
+<details>
+  <summary>Click to see more details</summary>
+     ![](images/ScreenHome.png)
+     ![](images/ScreenNewReport.png)
+     ![](images/ScreenProfile.png)
+     ![](images/ScreenReport.png)
+     ![](images/ScreenSite.png)
+     ![](images/ScreenUsers.png)
+     
+</details>
 
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue to discuss any changes.

@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConstructionSiteController;
 use App\Http\Controllers\ReportController;
+use App\Models\User;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -14,11 +15,28 @@ Route::get('/user', function (Request $request) {
 
 // Login Route
 Route::post('/login', function (Request $request) {
+    
+    $credentials = $request->only('email', 'password');
+
+    // Fetch user manually
+    $user = User::where('email', $credentials['email'])->first();
+
+    if (!$user) {
+        return response()->json(['error' => 'User not found'], 404);
+    }
+
+    // Log password verification result
+    Log::info('Password Match:', [
+        'attempted_password' => $credentials['password'],
+        'hashed_password' => $user->password,
+        'matches' => Hash::check($credentials['password'], $user->password)
+    ]);
+
     if (! Auth::attempt($request->only('email', 'password'))) {
         return response(['message' => __('auth.failed')], 422);
     }
     
-    $user = auth()->user();
+    //$user = auth()->user();
     $token = auth()->user()->createToken('client-app');
     return [
         'token' => $token->plainTextToken,

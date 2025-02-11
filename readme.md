@@ -88,13 +88,19 @@ Start managing your construction projects efficiently!
 ## Screenshots
 
 <details>
-  <summary>Click to see more details</summary>
-     ![](images/ScreenHome.png)
-     ![](images/ScreenNewReport.png)
-     ![](images/ScreenProfile.png)
-     ![](images/ScreenReport.png)
-     ![](images/ScreenSite.png)
-     ![](images/ScreenUsers.png)
+  <summary>Click to see screenshots</summary>
+   
+![](./images/ScreenHome.png)
+
+![](images/ScreenNewReport.png)
+     
+![](images/ScreenProfile.png)
+     
+![](images/ScreenReport.png)
+     
+![](images/ScreenSite.png)
+     
+![](images/ScreenUsers.png)
      
 </details>
 

@@ -53,6 +53,7 @@ class CreateAdminCommand extends Command
             'password' => Hash::make($password),
             'first_name' => $this->ask('First name:', 'User'),
             'last_name' => $this->ask('Last name:', '?'),
+            'role' => (int) $this->ask('Role (1=User, 2=Worker, 3=Manager, 4=Technician):', 1),
             'admin' => true,
         ]);
 

@@ -26,7 +26,7 @@ export function AuthProvider({ children }) {
             const response = await axios.get('/user');
             setIsLoggedIn(true);
             setUserId(response.data.id);
-            setIsAdmin(response.data.is_admin);
+            setIsAdmin(response.data.admin);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
     const login = (token, id) => {
         localStorage.setItem('token', token);
         setIsLoggedIn(true);
-        setIsAdmin(response.data.is_admin);
+        setIsAdmin(response.data.admin);
         setUserId(id);
     };
 

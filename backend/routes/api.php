@@ -41,7 +41,7 @@ Route::post('/login', function (Request $request) {
     return [
         'token' => $token->plainTextToken,
         'id' => $user->id,
-        'admin' => $user->is_admin,
+        'admin' => $user->admin,
         'role' => $user->role,
         'first_name' => $user->first_name,
         'last_name' => $user->last_name,

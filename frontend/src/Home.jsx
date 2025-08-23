@@ -121,6 +121,7 @@ export default function Home() {
 
     return (
         <div className='mx-5 my-5 flex justify-between'>
+
             <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%' }}>
                 {images.map((image) => (
                     <ImageButton

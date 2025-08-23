@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -9,6 +9,8 @@ import { reportService } from "../api/reports";
 import ConfirmModal from "../Modals/ConfirmModal";
 import { useNavigate } from 'react-router-dom';
 import { roleService } from "../api/roles";
+import { useAuth } from "../AuthContext";
+import toast from "react-hot-toast";
 
 export default function CellButtons({ id, type }) {
     const [open, setOpen] = useState(false);
@@ -34,7 +36,13 @@ export default function CellButtons({ id, type }) {
         }
     };
 
+    const { isAdmin } = useAuth();
+
     const handleDelete = async () => {
+        if (!isAdmin) {
+            toast.error("You don't have permission to delete items.");
+            return;
+        }
         switch (type) {
             case 'user':
                 try {

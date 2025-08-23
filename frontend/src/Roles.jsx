@@ -8,11 +8,19 @@ import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid2';
 import { roleService } from './api/roles';
+import RoleModal from './Modals/RoleModal';
+import { Button, CardActions } from '@mui/material';
+import { Add } from '@mui/icons-material';
 
 export default function Roles() {
     const [rows, setRows] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    //Role Modal
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const columns = [
         { field: 'id', headerName: 'ID', headerClassName: 'table-header', flex: 1, maxWidth: 100 },
@@ -52,6 +60,13 @@ export default function Roles() {
                         <CardHeader title="Roles"
                             titleTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
                         />
+
+                        <CardActions sx={{ ml: 1 }}>
+                            <Button variant="contained" onClick={handleOpen} startIcon={<Add />}>
+                                Add New Role
+                            </Button>
+                            <RoleModal open={open} handleClose={handleClose} newRole={true} />
+                        </CardActions>
                         <CardContent>
                             <div>
                                 <DataGrid

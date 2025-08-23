@@ -22,10 +22,12 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import dayjs from "dayjs";
 import toast from "react-hot-toast";
+import { useAuth } from "./AuthContext";
 
 export default function Site() {
 
     const { id } = useParams();
+    const { isAdmin } = useAuth();
     const navigate = useNavigate();
 
     //Assigned users
@@ -44,6 +46,10 @@ export default function Site() {
         };
     };
     const handleDelete = async () => {
+        if (!isAdmin) {
+            toast.error("You need admin permissions to delete a site");
+            return;
+        }
         try {
             await siteService.deleteSite(id);
             window.location.reload();

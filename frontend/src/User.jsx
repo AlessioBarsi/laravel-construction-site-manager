@@ -20,9 +20,12 @@ import dayjs from "dayjs";
 
 import ConfirmModal from './Modals/ConfirmModal.jsx';
 import UserEditModal from "./Modals/UserEditModal.jsx";
+import toast from "react-hot-toast";
+import { useAuth } from "./AuthContext.jsx";
 
 export default function User() {
     const { id } = useParams();
+    const { isAdmin } = useAuth();
     const navigate = useNavigate();
 
     //Modal states
@@ -38,6 +41,10 @@ export default function User() {
         };
     };
     const handleDelete = async () => {
+        if (!isAdmin) {
+            toast.error("You don't have permission to delete items.");
+            return;
+        }
         try {
             await userService.deleteUser(id);
             window.location.reload();

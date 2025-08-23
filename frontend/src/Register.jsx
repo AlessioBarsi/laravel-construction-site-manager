@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { userService } from "./api/users";
 import { roleService } from "./api/roles";
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from "./AuthContext";
 import { Card, TextField, Button, CardContent, CardActions, CardHeader, FormControl, Typography, Autocomplete } from "@mui/material";
-import axios from "axios";
 import toast from "react-hot-toast";
 
 const cardStyle = {
@@ -20,12 +18,15 @@ const cardStyle = {
 }
 
 export default function Register() {
+    const isLoggedIn = localStorage.getItem('token') ? true : false;
     const navigate = useNavigate();
-    const { login } = useAuth();
     const [roleData, setRoleData] = useState(null);
-    const [open, setOpen] = useState(false);
 
     useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/home');
+        }
+
         const fetchRoles = async () => {
             try {
                 const roles = await roleService.getRoles();
@@ -36,6 +37,7 @@ export default function Register() {
             }
         }
         fetchRoles();
+
     }, []);
 
     const [formData, setFormData] = useState({
@@ -43,14 +45,13 @@ export default function Register() {
         password: '',
         first_name: '',
         last_name: '',
-        role: null,
+        role: 1,
     });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const newUser = await userService.createUser(formData);
-            console.log(JSON.stringify(newUser, null, 2));
             toast.success(<div>Registration complete<br/>You will be redirected to the login page...</div>)
             setTimeout(() => {
                 navigate('/login');
@@ -92,7 +93,6 @@ export default function Register() {
                             <TextField required type='text' id='first_name' label='First Name' onChange={handleChange} />
                             <TextField required type='text' id='last_name' label='Last Name' onChange={handleChange} />
                             <Autocomplete
-                                hidden
                                 onChange={handleChangeRole}
                                 disablePortal
                                 options={roleData ? roleData.map((role) => ({ label: `${role.name}`, id: role.id })) : []}

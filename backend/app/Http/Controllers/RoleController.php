@@ -27,7 +27,7 @@ class RoleController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'icon' => 'required|string',
+            'icon' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -52,7 +52,7 @@ class RoleController extends Controller
 
             $validator = Validator::make($request->all(), [
                 'name' => 'sometimes|required|string',
-                'icon' => 'sometimes|required|string',
+                'icon' => 'sometimes|nullable|string',
             ]);
 
             if ($validator->fails()) {

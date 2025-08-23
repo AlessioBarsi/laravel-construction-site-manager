@@ -9,6 +9,7 @@ export function AuthProvider({ children }) {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userId, setUserId] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -25,6 +26,7 @@ export function AuthProvider({ children }) {
             const response = await axios.get('/user');
             setIsLoggedIn(true);
             setUserId(response.data.id);
+            setIsAdmin(response.data.is_admin);
             setIsLoading(false);
         } catch (error) {
             console.log(error);
@@ -36,6 +38,7 @@ export function AuthProvider({ children }) {
     const login = (token, id) => {
         localStorage.setItem('token', token);
         setIsLoggedIn(true);
+        setIsAdmin(response.data.is_admin);
         setUserId(id);
     };
 
@@ -47,7 +50,7 @@ export function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, userId, isLoading, login, logout }}>
+        <AuthContext.Provider value={{ isLoggedIn, userId, isLoading, isAdmin, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

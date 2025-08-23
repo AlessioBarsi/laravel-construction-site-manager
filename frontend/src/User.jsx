@@ -173,6 +173,10 @@ export default function User() {
                                                         switch (key) {
                                                             case 'admin':
                                                                 return value ? 'Yes' : 'No';
+                                                            case 'role':
+                                                                return (roleData && roleData.id != 0) ? (
+                                                                    roleData.name
+                                                                ) : 'No role assigned';
                                                             default:
                                                                 return value;
                                                         }

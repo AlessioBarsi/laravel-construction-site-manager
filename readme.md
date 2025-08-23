@@ -50,6 +50,11 @@ A web application to manage and oversee construction projects and workers, built
     php artisan migrate
     ```
 
+    Seed the database with initial roles
+    ```sh
+    php artisan db:seed
+    ```
+
     Run the following command to create your user account with admin permissions:
     ```sh
     php artisan admin:create
@@ -63,7 +68,7 @@ A web application to manage and oversee construction projects and workers, built
 
     Create the .env file
     ```sh
-    cp .env.example .env
+    cp .env\ copy .env
     ```
 
 4. ### **Run the application:**

@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ConstructionSiteController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\MediaController;
 use App\Models\User;
 
 Route::get('/user', function (Request $request) {
@@ -85,3 +86,9 @@ Route::post('/reports', [ReportController::Class, 'store']);
 Route::put('/reports/{id}', [ReportController::Class, 'update']);
 Route::delete('/reports/{id}', [ReportController::Class, 'destroy']);
 Route::get('/reports/get-users/{id}', [ReportController::Class, 'getUsers']);
+
+//Media
+Route::get('/media', [MediaController::Class, 'index']);
+Route::get('/media/{id}', [MediaController::Class, 'show']);
+Route::post('/media', [MediaController::Class, 'store']);
+Route::delete('/media/{id}', [MediaController::Class, 'destroy']);

@@ -10,7 +10,7 @@ A web application to manage and oversee construction projects and workers, built
 - User authorization depending on role
 
 **WIP**:
-- Role views
+- Role assignments
 - Image upload and attachment to reports
 - Export reports as formatted .csv spreadsheet
 - Route protection from non-admin users

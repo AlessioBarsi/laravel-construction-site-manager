@@ -1,5 +1,4 @@
 import axios from 'axios';
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -18,6 +17,7 @@ import Report from './Report.jsx';
 import Register from './Register.jsx';
 import './index.css';
 import { PrivateRoute } from './PrivateRoute.jsx';
+import Roles from './Roles.jsx';
 
 // Set axios to a window property for easy access
 window.axios = axios;
@@ -63,6 +63,7 @@ createRoot(document.getElementById('root')).render(
                      <Route path="/users/:id" element={<User />} />
                      <Route path="/sites" element={<Sites />} />
                      <Route path="/sites/:id" element={<Site />} />
+                     <Route path="/roles" element={<Roles />} />
                   </Route>
                </Route>
             </Routes>

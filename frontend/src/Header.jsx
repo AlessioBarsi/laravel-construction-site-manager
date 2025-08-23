@@ -1,5 +1,5 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { Link, Outlet } from 'react-router-dom'
 import { useAuth } from './AuthContext'
 
@@ -8,6 +8,7 @@ const navigation = [
   { name: 'Construction Sites', href: '/sites', current: true },
   { name: 'Reports', href: '/reports', current: true },
   { name: 'Users', href: '/users', current: true },
+  { name: 'Roles', href: '/roles', current: true },
 ]
 
 function classNames(...classes) {

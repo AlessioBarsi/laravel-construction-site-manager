@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { siteService } from './api/sites';
 import CellButtons from './Components/CellButtons';
 import SiteModal from './Modals/SiteModal';
 import { Link } from 'react-router-dom';
+import { format } from 'date-fns';
 
 import { DataGrid } from '@mui/x-data-grid';
 import Card from '@mui/material/Card';
@@ -21,17 +22,33 @@ export default function Sites() {
     { field: 'title', headerName: 'Title', headerClassName: 'table-header', flex: 1, },
     { field: 'client', headerName: 'Client', headerClassName: 'table-header', flex: 1, },
     { field: 'location', headerName: 'Location', headerClassName: 'table-header', flex: 1, },
-    { field: 'start_date', headerName: 'Start Date', headerClassName: 'table-header', flex: 1, },
-    { field: 'end_date', headerName: 'End Date', headerClassName: 'table-header', flex: 1, },
+    //{ field: 'start_date', headerName: 'Start Date', headerClassName: 'table-header', flex: 1, },
+    {
+      field: 'start_date', headerName: 'Start Date', headerClassName: 'table-header',
+      valueFormatter: (params) => {
+        return format(params, 'yyyy-MM-dd');
+      }, flex: 1
+    },
+    //{ field: 'end_date', headerName: 'End Date', headerClassName: 'table-header', flex: 1, },
+    {
+      field: 'end_date', headerName: 'End Date', headerClassName: 'table-header',
+      valueFormatter: (params) => {
+        if (params) {
+          return format(params, 'yyyy-MM-dd');
+        } else {
+          return 'Ongoing';
+        }
+      }, flex: 1
+    },
     { field: 'status', headerName: 'Status', headerClassName: 'table-header', flex: 1, },
-    { field: 'director', headerName: 'Director', headerClassName: 'table-header', flex: 1,
+    {
+      field: 'director', headerName: 'Director', headerClassName: 'table-header', flex: 1,
       renderCell: (params) => {
         let directorName = 'Loading...';
         if (!loading && directors.find(user => user.id === params.value)) {
-          //director = directors.find(user => user.id === params.value);
           directorName = `${directors.find(user => user.id === params.value).first_name} ${directors.find(user => user.id === params.value).last_name}`;
         }
-        return <Link style={{color:'blue'}} to={`/users/${params.value}`}>{directorName}</Link>;
+        return <Link style={{ color: 'blue' }} to={`/users/${params.value}`}>{directorName}</Link>;
       }
     },
     {

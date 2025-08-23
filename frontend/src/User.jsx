@@ -10,7 +10,6 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import Button from '@mui/material/Button';
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import { List, ListItem, ListItemText, Divider, Typography } from "@mui/material";
@@ -19,7 +18,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import dayjs from "dayjs";
 
-import ConfirmModal from './Modals/ConfirmModal.jsx'
+import ConfirmModal from './Modals/ConfirmModal.jsx';
 import UserEditModal from "./Modals/UserEditModal.jsx";
 
 export default function User() {

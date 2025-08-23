@@ -8,6 +8,7 @@ import { siteService } from "../api/sites";
 import { reportService } from "../api/reports";
 import ConfirmModal from "../Modals/ConfirmModal";
 import { useNavigate } from 'react-router-dom';
+import { roleService } from "../api/roles";
 
 export default function CellButtons({ id, type }) {
     const [open, setOpen] = useState(false);
@@ -23,6 +24,14 @@ export default function CellButtons({ id, type }) {
         if (result) {
             handleDelete(id);
         };
+    };
+
+    function handleRelatedButton(type, id) {
+        if (type !== 'role') {
+            navigate(`/${type}s/${id}`);
+        } else {
+            navigate(`/users/?roleFilter=${id}`);
+        }
     };
 
     const handleDelete = async () => {
@@ -51,6 +60,14 @@ export default function CellButtons({ id, type }) {
                     console.log(err);
                 }
                 break;
+            case 'role':
+                try {
+                    await roleService.deleteRole(id);
+                    window.location.reload();
+                } catch (err) {
+                    console.log(err);
+                }
+                break;
             default:
                 console.log('Error: invalid type from parent component');
                 break;
@@ -60,7 +77,7 @@ export default function CellButtons({ id, type }) {
     return (
         <div>
             <Stack direction="row" spacing={1}>
-                <IconButton aria-label="account" color='primary' onClick={() => navigate(`/${type}s/${id}`)}>
+                <IconButton aria-label="account" color='primary' onClick={() => handleRelatedButton(type, id)}>
                     {(() => {
                         switch (type) {
                             case 'user':
@@ -69,6 +86,8 @@ export default function CellButtons({ id, type }) {
                                 return <Foundation />
                             case 'report':
                                 return <Article />
+                            case 'role':
+                                return <AccountCircle />
                             default:
                                 return <div>Icon Missing</div>
                         }

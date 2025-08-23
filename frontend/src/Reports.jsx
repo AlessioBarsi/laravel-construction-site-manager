@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import CellButtons from './Components/CellButtons';
 import { siteService } from './api/sites';
 import { reportService } from './api/reports';

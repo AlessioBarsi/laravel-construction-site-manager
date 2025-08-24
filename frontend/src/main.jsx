@@ -17,6 +17,7 @@ import Report from './Report.jsx';
 import Register from './Register.jsx';
 import './index.css';
 import { PrivateRoute } from './PrivateRoute.jsx';
+import { AdminRoute } from './AdminRoute.jsx';
 import Roles from './Roles.jsx';
 
 // Set axios to a window property for easy access
@@ -50,20 +51,22 @@ createRoot(document.getElementById('root')).render(
          <AppWrapper>
             <Routes>
                <Route path="/login" element={<Login />} />
-               <Route path="/register" element={<Register/>}/>
+               <Route path="/register" element={<Register />} />
 
-                  <Route element={<PrivateRoute/>}>
+               <Route element={<PrivateRoute />}>
                   <Route path="/" element={<Header />}>
                      <Route index element={<App />} />
                      <Route path="/home" element={<Home />} />
-                     <Route path="/profile" element={<Profile/>}/>
-                     <Route path="/reports" element={<Reports />}/>
-                     <Route path="/reports/:id" element={<Report />}/>
-                     <Route path="/users" element={<Users />} />
-                     <Route path="/users/:id" element={<User />} />
-                     <Route path="/sites" element={<Sites />} />
-                     <Route path="/sites/:id" element={<Site />} />
-                     <Route path="/roles" element={<Roles />} />
+                     <Route path="/profile" element={<Profile />} />
+                     <Route path="/reports" element={<Reports />} />
+                     <Route path="/reports/:id" element={<Report />} />
+                     <Route element={<AdminRoute />}>
+                        <Route path="/users" element={<Users />} />
+                        <Route path="/users/:id" element={<User />} />
+                        <Route path="/sites" element={<Sites />} />
+                        <Route path="/sites/:id" element={<Site />} />
+                        <Route path="/roles" element={<Roles />} />
+                     </Route>
                   </Route>
                </Route>
             </Routes>

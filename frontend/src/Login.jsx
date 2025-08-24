@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from "./AuthContext";
-import { Card, TextField, Button, CardContent, CardActions, CardHeader, FormControl, Typography, Paper } from "@mui/material";
+import { Card, TextField, Button, CardContent, CardActions, CardHeader, FormControl, Typography } from "@mui/material";
 import axios from "axios";
 import toast from 'react-hot-toast';
 

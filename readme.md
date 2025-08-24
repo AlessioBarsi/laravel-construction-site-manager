@@ -88,7 +88,19 @@ Start managing your construction projects efficiently!
 
 <details>
   <summary>Click to see screenshots</summary>
-     
+   
+   ![](https://github.com/AlessioBarsi/alessio-barsi-portfolio/blob/main/public/projects/laravel-construction-site-manager/ScreenHome.png)
+
+   ![](https://github.com/AlessioBarsi/alessio-barsi-portfolio/blob/main/public/projects/laravel-construction-site-manager/ScreenNewReport.png)
+   
+   ![](https://github.com/AlessioBarsi/alessio-barsi-portfolio/blob/main/public/projects/laravel-construction-site-manager/ScreenReport.png)
+   
+   ![](https://github.com/AlessioBarsi/alessio-barsi-portfolio/blob/main/public/projects/laravel-construction-site-manager/ScreenProfile.png)
+   
+   ![](https://github.com/AlessioBarsi/alessio-barsi-portfolio/blob/main/public/projects/laravel-construction-site-manager/ScreenUsers.png)
+
+   ![](https://github.com/AlessioBarsi/alessio-barsi-portfolio/blob/main/public/projects/laravel-construction-site-manager/ScreenSite.png)
+
 </details>
 
 ## Contributing

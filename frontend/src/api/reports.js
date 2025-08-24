@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL, 
+    baseURL: import.meta.env.VITE_API_URL,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -31,7 +31,11 @@ export const reportService = {
     // Create Report
     createReport: async (ReportData) => {
         try {
-            const response = await api.post('/reports', ReportData);
+            const isFormData = ReportData instanceof FormData;
+
+            const response = await api.post('/reports', ReportData, {
+                headers: isFormData ? { 'Content-Type': 'multipart/form-data' } : {},
+            });
             return response.data;
         } catch (error) {
             throw error.response?.data || error.message;

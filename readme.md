@@ -4,16 +4,10 @@ A web application to manage and oversee construction projects and workers, built
 
 ## Features
 
-- User submitted reports of their daily work activities
-- Issues and activities management
-- Management and overview of assigned users to existing projects
-- User authorization depending on role
-
-**WIP**:
-- Role assignments
-- Image upload and attachment to reports
-- Export reports as formatted .csv spreadsheet
-- Route protection from non-admin users
+- User authentication with email and password
+- User submitted reports of their daily work activities, with attached images
+- Construction Sites and Reports management
+- Assignment of roles and work sites to users
 
 ## Installation
 
@@ -94,18 +88,6 @@ Start managing your construction projects efficiently!
 
 <details>
   <summary>Click to see screenshots</summary>
-   
-![](./images/ScreenHome.png)
-
-![](images/ScreenNewReport.png)
-     
-![](images/ScreenProfile.png)
-     
-![](images/ScreenReport.png)
-     
-![](images/ScreenSite.png)
-     
-![](images/ScreenUsers.png)
      
 </details>
 

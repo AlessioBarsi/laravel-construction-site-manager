@@ -8,12 +8,15 @@ import Grid from '@mui/material/Grid2';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
-import { List, ListItem, ListItemText, Divider } from "@mui/material";
+import { List, ListItem, ListItemText, Divider, CardActions } from "@mui/material";
 import dayjs from "dayjs";
 import { userService } from "./api/users";
+import { useNavigate } from "react-router-dom";
 
 export default function Report() {
     const { id } = useParams();
+    const baseURL = import.meta.env.VITE_API_URL.replace('/api', '');
+    const navigate = useNavigate();
 
     //API calls
     const [loading, setLoading] = useState(true);
@@ -28,6 +31,7 @@ export default function Report() {
             try {
                 const report = await reportService.getReport(id);
                 setReportData(report);
+                console.log(report);
             } catch (err) {
                 console.log(err);
                 setError(err.message);
@@ -153,6 +157,8 @@ export default function Report() {
                                                             return value ? 'Yes' : 'No problem';
                                                         case 'critical':
                                                             return value ? 'Yes' : 'No';
+                                                        case 'media':
+                                                            return (value && value.length > 0) ? 'Yes' : 'No media attached';
                                                         default:
                                                             return JSON.stringify(value);
                                                     }
@@ -218,7 +224,14 @@ export default function Report() {
                             titleTypographyProps={{ variant: 'h6', fontWeight: 'bold' }}
                         />
                         <CardContent>
-                            <div>Image goes here</div>
+                            <div>{reportData.media && reportData.media.length > 0 ?
+                                <div className="flex items-center space-x-2">
+                                    <img className="w-[20%] h-[30%]" src={`${baseURL}/storage/${reportData.media[0].filename}`} alt="Media could not be loaded" />
+                                    <Link to={`${baseURL}/storage/${reportData.media[0].filename}`} className="text-blue-500 hover:underline">
+                                        View Media
+                                    </Link>
+                                </div>
+                                : 'No media attached'}</div>
                         </CardContent>
                     </Card>
                 </Grid>
